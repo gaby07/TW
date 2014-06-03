@@ -1,0 +1,168 @@
+﻿body 
+{
+    font-family: 'lucida grade', Tahoma, Verdana, Arial, Sans-Serif;
+    background-color: #e9e9e9;
+}
+
+#wrapper 
+{
+  width: 1080px;  
+  margin: 0 auto;
+  padding: 10px;
+  border: 5px solid #dedede;
+  background-color: #fff;
+}
+
+#banner
+{
+    height: 200px;
+    border: 3px solid #e3e3e3;
+    background-image: url(../Images/h1.jpg);
+    background-repeat: no-repeat;
+    background-size: cover;
+}
+
+#navigation 
+{
+    height: 60px;
+    border: 3px solid #e3e3e3;
+    margin: 20px 0px 0px 0px;
+    background-image: url(../Images/bar_background.png);
+    text-shadow: 0.1em 0.1em #333;
+}
+
+#nav 
+{
+    list-style: none;
+}
+
+#nav ul 
+{
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    width: auto;
+    display: none;
+}
+
+#nav li 
+{
+    font-size: 24px;
+    float: left;
+    position: relative;
+    width: 180px;
+    height: 50px;
+}
+
+#nav li ul li 
+{
+    background-image: url(../Images/bar_background.png);
+    background-repeat: no-repeat;
+    background-size: cover;
+    border: 3px solid #e3e3e3;
+    padding-left: 10px;
+}
+
+#nav a:link, #nav a:active, #nav a:visited 
+{
+    display: block;
+    color: #fff;
+    text-decoration: none;
+}
+
+#nav a:hover 
+{
+    color: lightblue;
+}
+
+#content_area 
+{
+    float:left;
+    width: 1080px;
+    margin: 20px 0px 20px 0px;
+    padding: 10px;
+    border: 3px solid #e3e3e3;
+}
+
+#content_area1 
+{
+    float:left;
+    width: 1050px;
+    margin: 20px 0px 20px 0px;
+    padding: 10px;
+    border: 3px solid #e3e3e3;
+}
+
+#sidebar 
+{
+    float: right;
+    width: 250px;
+    height: 400px;
+    margin: 20px 10px 20px 10px;
+    border: 3px solid #e3e3e3;
+}
+
+#footer 
+{
+    clear: both;
+    width: auto;
+    height: 60px;
+    margin-top: 20px;
+    background-image: url(../Images/bar_background.png);
+    text-shadow: 0.1em 0.1em #333;
+    color: #fff;
+    text-align: center;
+}
+
+#Log 
+{
+    font-size: 18px;
+    float: right;
+}
+
+#ContentPlaceHolder1_Panel1 div
+{
+    padding: 10px;
+    width: 700px;
+    height: 180px;
+}
+
+.CTip
+{
+    width: 550px;
+    font-size: 18px;
+    color: Gray;
+}
+
+.CDescr
+{
+    width: 550px;
+    font-size: 14px;
+    color: Gray;
+    padding: 10px;
+}
+
+.CPret
+{
+    padding: 10px;
+    width: 250px;
+    color: orange;
+}
+
+.CBtn
+{
+    padding: 10px;
+}
+
+.CImg
+{
+    float: left;
+    width: 150px;
+    height: 150px;
+    padding: 10px;
+    margin: -10px 15px 5px 5px;
+    -moz-border-radius: 20px;
+    -weebkit-border-radius: 20px;
+    border-radius: 20px;
+}
+
