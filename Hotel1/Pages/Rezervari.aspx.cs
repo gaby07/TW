@@ -9,38 +9,16 @@ using System.Text;
 
 public partial class Pages_Rezervari : System.Web.UI.Page
 {
+
     protected void Page_Load(object sender, EventArgs e)
     {
-
-    }
-
-    protected void ImageButton1_Click(object sender, ImageClickEventArgs e)
-    {
-        Calendar1.Visible = true;
-    }
-
-    protected void Calendar1_SelectionChanged(object sender, EventArgs e)
-    {
+        Calendar1.SelectedDate = DateTime.Now;
+        Calendar2.SelectedDate = DateTime.Now;
         txtData1.Text = Calendar1.SelectedDate.ToShortDateString();
-        Calendar1.Visible = false;
-    }
-
-    protected void ImageButton2_Click(object sender, ImageClickEventArgs e)
-    {
-        Calendar2.Visible = true;
-    }
-
-    protected void Calendar2_SelectionChanged(object sender, EventArgs e)
-    {
         txtData2.Text = Calendar2.SelectedDate.ToShortDateString();
-        Calendar2.Visible = false;
-    }
-    protected void btnCauta_Click(object sender, EventArgs e)
-    {
-        ArrayList camere = Conexiune.CautaCamera(ddlCam.SelectedValue, Calendar1.SelectedDate, Calendar2.SelectedDate);
-        //StringBuilder sb = new StringBuilder();
-        List<Button> butoane = new List<Button>();
-        int nr = 0;
+
+        ArrayList camere = Conexiune.CautaCamera(ddlCam.SelectedValue, Calendar1.SelectedDate, Calendar1.SelectedDate);
+        int nr = -1;
 
         foreach (Camera camera in camere)
         {
@@ -82,34 +60,23 @@ public partial class Pages_Rezervari : System.Web.UI.Page
             };
             Button Rezerva = new Button
             {
-                ID = Convert.ToString(nr),
+                ID = nr.ToString(),
                 Text = "Rezerva",
                 CssClass = "CBtn"
+
             };
-           /* Rezerva.Click += new System.EventHandler(this.Rezerva_Click);
-            EventArgs ee = new EventArgs();
-            Rezerva.OnClientClick = "Rezerva_Click(Rezerva, null)";*/
-
-           /* Rezerva.Click += delegate(object ss, EventArgs ee)
-            { 
-                Session["idcam"] = camera.Id;
-                Session["data1"] = txtData1.Text;
-                Session["data2"] = txtData2.Text;
-
-                Response.Redirect("~/Pages/Formular.aspx"); }; */
-
-
-            //Rezerva.Click += (s, ee) => { Response.Redirect("~/Pages/Home.aspx"); };
-
-           //Rezerva.Click += new EventHandler(Rezerva_Click);
-            Rezerva_Click(sender, e);
-            butoane.Add(Rezerva);
-
+            Rezerva.Click += delegate(object ss, EventArgs ee)
+            {
+                int x = Convert.ToInt32(Rezerva.ID);
+                Session["Camera"] = (Camera)camere[x];
+                if (Session["Camera"] != null) Response.Redirect("~/Pages/Formular.aspx");
+            };
+            //Rezerva.PostBackUrl = "~/Pages/Formular.aspx";
             CamPanel.Controls.Add(literal);
             CamPanel.Controls.Add(literal5);
             CamPanel.Controls.Add(image);
             CamPanel.Controls.Add(lblTip);
-            CamPanel.Controls.Add(literal2); 
+            CamPanel.Controls.Add(literal2);
             CamPanel.Controls.Add(lblVedere);
             CamPanel.Controls.Add(literal3);
             CamPanel.Controls.Add(lblAc);
@@ -121,15 +88,40 @@ public partial class Pages_Rezervari : System.Web.UI.Page
 
             Panel1.Controls.Add(CamPanel);
         }
+       
     }
 
-
-    protected void Rezerva_Click(object sender, EventArgs e)
+    protected void ImageButton1_Click(object sender, ImageClickEventArgs e)
     {
-       // Session["idcam"] = ;
-        Session["data1"] = txtData1.Text;
-        Session["data2"] = txtData2.Text;
+        Calendar1.Visible = true;
+    }
 
-        Response.Redirect("~/Pages/Formular.aspx");
+    protected void Calendar1_SelectionChanged(object sender, EventArgs e)
+    {
+        txtData1.Text = Calendar1.SelectedDate.ToShortDateString();
+        Calendar1.Visible = false;
+    }
+
+    protected void ImageButton2_Click(object sender, ImageClickEventArgs e)
+    {
+        Calendar2.Visible = true;
+    }
+
+    protected void Calendar2_SelectionChanged(object sender, EventArgs e)
+    {
+        txtData2.Text = Calendar2.SelectedDate.ToShortDateString();
+        Calendar2.Visible = false;
+    }
+    protected void txtData1_TextChanged(object sender, EventArgs e)
+    {
+
+    }
+    protected void txtData2_TextChanged(object sender, EventArgs e)
+    {
+
+    }
+    protected void ddlCam_SelectedIndexChanged(object sender, EventArgs e)
+    {
+        
     }
 }
