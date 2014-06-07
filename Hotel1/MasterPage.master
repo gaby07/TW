@@ -19,6 +19,7 @@
                 <ul id = "nav">
                     <li><a href = "Home.aspx">Home</a></li>
                     <li><a href = "Rezervari.aspx">Rezervari</a></li>
+                    <li><a href = "Camere.aspx">Situatie Camere</a></li>
                     <li><a href = "Management.aspx">Management</a></li>
                 </ul>
                 <div id = "Log"> 

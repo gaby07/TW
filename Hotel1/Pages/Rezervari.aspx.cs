@@ -12,8 +12,8 @@ public partial class Pages_Rezervari : System.Web.UI.Page
 
     protected void Page_Load(object sender, EventArgs e)
     {
-        Calendar1.SelectedDate = DateTime.Now;
-        Calendar2.SelectedDate = DateTime.Now;
+        Calendar1.SelectedDate = Convert.ToDateTime(Session["Data1"]);
+        Calendar2.SelectedDate = Convert.ToDateTime(Session["Data2"]);
         txtData1.Text = Calendar1.SelectedDate.ToShortDateString();
         txtData2.Text = Calendar2.SelectedDate.ToShortDateString();
 
@@ -101,6 +101,7 @@ public partial class Pages_Rezervari : System.Web.UI.Page
     protected void Calendar1_SelectionChanged(object sender, EventArgs e)
     {
         txtData1.Text = Calendar1.SelectedDate.ToShortDateString();
+        Session["Data1"] = Calendar1.SelectedDate;
         Calendar1.Visible = false;
     }
 
@@ -112,6 +113,7 @@ public partial class Pages_Rezervari : System.Web.UI.Page
     protected void Calendar2_SelectionChanged(object sender, EventArgs e)
     {
         txtData2.Text = Calendar2.SelectedDate.ToShortDateString();
+        Session["Data2"] = Calendar2.SelectedDate;
         Calendar2.Visible = false;
     }
     protected void txtData1_TextChanged(object sender, EventArgs e)

@@ -48,10 +48,7 @@
         </tr>
         <tr>
             <td>
-                <asp:CompareValidator ID="cmpVal1" ControlToCompare="txtData1" 
-                    ControlToValidate="txtData2" Type="Date" Operator="GreaterThanEqual"   
-                    ErrorMessage="*Data invalida" runat="server" ForeColor="#FF9966"></asp:CompareValidator>
-            </td>
+                &nbsp;</td>
         </tr>
         <tr>
             <td>
