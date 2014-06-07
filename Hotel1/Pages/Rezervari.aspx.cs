@@ -69,6 +69,8 @@ public partial class Pages_Rezervari : System.Web.UI.Page
             {
                 int x = Convert.ToInt32(Rezerva.ID);
                 Session["Camera"] = (Camera)camere[x];
+                Session["Data1"] = Calendar1.SelectedDate;
+                Session["Data2"] = Calendar2.SelectedDate;
                 if (Session["Camera"] != null) Response.Redirect("~/Pages/Formular.aspx");
             };
             //Rezerva.PostBackUrl = "~/Pages/Formular.aspx";

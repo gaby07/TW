@@ -147,7 +147,7 @@ public class Conexiune
         try
         {
             con.Open();
-            query = string.Format("INSERT INTO rez VALUES ('{0}', '{1}', '{2}', '{3}', '{4}', '{5}', '{6}', '{7}')",  rez.IdCam, rez.Data1, rez.Data2, rez.CNP, rez.Buletin, rez.Adresa, rez.Telefon, rez.Mail);
+            query = string.Format("INSERT INTO rez VALUES ('{0}', '{1}', '{2}', '{3}', '{4}', '{5}', '{6}', '{7}', '{8}')",  rez.IdCam, rez.Data1, rez.Data2, rez.Nume, rez.CNP, rez.Buletin, rez.Adresa, rez.Telefon, rez.Mail);
             comanda.CommandText = query;
             comanda.ExecuteNonQuery();            
         }
