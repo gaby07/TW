@@ -79,6 +79,7 @@
 {
     float:left;
     width: 1080px;
+    min-height:300px;
     margin: 20px 0px 20px 0px;
     padding: 10px;
     border: 3px solid #e3e3e3;
@@ -88,6 +89,7 @@
 {
     float:left;
     width: 1050px;
+    min-height:300px;
     margin: 20px 0px 20px 0px;
     padding: 10px;
     border: 3px solid #e3e3e3;
