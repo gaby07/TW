@@ -6,11 +6,10 @@
 
 #wrapper 
 {
-  width: 1080px;  
+  width: 1180px;  
   margin: 0 auto;
   padding: 10px;
   border: 5px solid #dedede;
-  background-color: #fff;
 }
 
 #banner
@@ -125,7 +124,7 @@
 #ContentPlaceHolder1_Panel1 div
 {
     padding: 10px;
-    width: 700px;
+    width: 800px;
     height: 180px;
 }
 
