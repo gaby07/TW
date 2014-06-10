@@ -14,4 +14,9 @@ public partial class Pages_Management : System.Web.UI.Page
             Response.Redirect("~/Pages/Logare.aspx");
         }
     }
+    protected void Button1_Click(object sender, EventArgs e)
+    {
+        Camera camera = new Camera(txtTip.Text, (int)Convert.ToInt32(txtPret.Text), txtAC.Text, txtVedere.Text, txtImagine.Text);
+        Conexiune.AdaugaCamera(camera);
+    }
 }

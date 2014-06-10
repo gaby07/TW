@@ -9,7 +9,8 @@
                 <asp:Label ID="Data1" runat="server" Text="Data 1:"></asp:Label>
             </td>
             <td>
-                <asp:TextBox ID="txtData1" runat="server" Enabled="False"></asp:TextBox>
+                <asp:TextBox ID="txtData1" runat="server" Enabled="False" 
+                    ontextchanged="txtData1_TextChanged"></asp:TextBox>
             </td>
             <td>
                 <asp:ImageButton ID="ImageButton1" runat="server" Height="23px" 
@@ -29,7 +30,8 @@
                 <asp:Label ID="lblData2" runat="server" Text="Data 2:"></asp:Label>
             </td>
             <td>
-                <asp:TextBox ID="txtData2" runat="server" Enabled="False"></asp:TextBox>
+                <asp:TextBox ID="txtData2" runat="server" Enabled="False" 
+                    ontextchanged="txtData2_TextChanged"></asp:TextBox>
             </td>
             <td>
                 <asp:ImageButton ID="ImageButton2" runat="server" Height="23px" 
@@ -46,17 +48,15 @@
         </tr>
         <tr>
             <td>
-                <asp:CompareValidator ID="cmpVal1" ControlToCompare="txtData1" 
-                    ControlToValidate="txtData2" Type="Date" Operator="GreaterThanEqual"   
-                    ErrorMessage="*Data invalida" runat="server" ForeColor="#FF9966"></asp:CompareValidator>
-            </td>
+                &nbsp;</td>
         </tr>
         <tr>
             <td>
                 <asp:Label ID="lblCam" runat="server" Text="Tip camera:"></asp:Label>
             </td>
             <td>
-                <asp:DropDownList ID="ddlCam" runat="server">
+                <asp:DropDownList ID="ddlCam" runat="server" AutoPostBack="True" 
+                    onselectedindexchanged="ddlCam_SelectedIndexChanged">
                     <asp:ListItem>single</asp:ListItem>
                     <asp:ListItem>dubla</asp:ListItem>
                     <asp:ListItem>tripla</asp:ListItem>
@@ -66,9 +66,7 @@
         <tr>
             <td></td>
             <td>
-                <asp:Button ID="btnCauta" runat="server" Text="Cauta camera" 
-                    onclick="btnCauta_Click" />
-            </td>
+                &nbsp;</td>
         </tr>
     </table>
     <br />

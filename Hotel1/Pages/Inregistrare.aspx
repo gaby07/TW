@@ -10,7 +10,7 @@
 
         <td>
             <asp:TextBox ID="txtNume" runat="server"></asp:TextBox>
-            <asp:RequiredFieldValidator ID="RequiredFieldValidator1" runat="server" 
+            <asp:RequiredFieldValidator ValidationGroup="inreg" ID="RequiredFieldValidator1" runat="server" 
                ControlToValidate="txtNume" ErrorMessage="*"></asp:RequiredFieldValidator>
         </td>
     </tr>
@@ -20,7 +20,7 @@
             Parola:</td>
         <td>
             <asp:TextBox ID="txtParola" runat="server" TextMode="Password"></asp:TextBox>
-            <asp:RequiredFieldValidator ID="RequiredFieldValidator2" runat="server" 
+            <asp:RequiredFieldValidator ValidationGroup="inreg" ID="RequiredFieldValidator2" runat="server" 
                 ControlToValidate="txtParola" ErrorMessage="*"></asp:RequiredFieldValidator>
         </td>
     </tr>
@@ -30,7 +30,7 @@
             Confirmare parola:</td>
         <td>
             <asp:TextBox ID="txtConfirm" runat="server" TextMode="Password"></asp:TextBox>
-            <asp:RequiredFieldValidator ID="RequiredFieldValidator3" runat="server" 
+            <asp:RequiredFieldValidator ValidationGroup="inreg" ID="RequiredFieldValidator3" runat="server" 
                 ControlToValidate="txtConfirm" ErrorMessage="*"></asp:RequiredFieldValidator>
         </td>
     </tr>
@@ -40,14 +40,14 @@
             Email:</td>
         <td>
             <asp:TextBox ID="txtEmail" runat="server"></asp:TextBox>
-            <asp:RequiredFieldValidator ID="RequiredFieldValidator4" runat="server" 
+            <asp:RequiredFieldValidator ValidationGroup="inreg" ID="RequiredFieldValidator4" runat="server" 
                 ControlToValidate="txtEmail" ErrorMessage="*"></asp:RequiredFieldValidator>
         </td>
     </tr>
 
     <tr>
         <td>
-            <asp:Button ID="btnInreg" runat="server" onclick="btnInreg_Click" 
+            <asp:Button ValidationGroup="inreg" ID="btnInreg" runat="server" onclick="btnInreg_Click" 
                 Text="Register" />
             <asp:CompareValidator ID="CompareValidator1" runat="server" 
                 ControlToCompare="txtParola" ControlToValidate="txtConfirm" 

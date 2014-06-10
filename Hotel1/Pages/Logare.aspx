@@ -8,7 +8,7 @@
             <td>Login:</td>
             <td style="width: 207px">
                 <asp:TextBox ID="txtLogare" runat="server"></asp:TextBox>
-                <asp:RequiredFieldValidator ID="RequiredFieldValidator1" runat="server" 
+                <asp:RequiredFieldValidator ValidationGroup="logare" ID="RequiredFieldValidator1" runat="server" 
                     ErrorMessage="*" ControlToValidate="txtLogare"></asp:RequiredFieldValidator>
             </td>
         </tr>
@@ -16,13 +16,13 @@
             <td>Password:</td>
             <td style="width: 207px">
                 <asp:TextBox ID="txtParola" runat="server" TextMode="Password"></asp:TextBox>
-                <asp:RequiredFieldValidator ID="RequiredFieldValidator2" runat="server" 
+                <asp:RequiredFieldValidator ValidationGroup="logare" ID="RequiredFieldValidator2" runat="server" 
                     ErrorMessage="*" ControlToValidate="txtParola"></asp:RequiredFieldValidator>
             </td>
         </tr>
         <tr>
             <td>
-                <asp:Button ID="btnLogin" runat="server" Text="Logare" 
+                <asp:Button ValidationGroup="logare" ID="btnLogin" runat="server" Text="Logare" 
                     onclick="btnLogin_Click" /><br />
                 <asp:Label ID="lblEr" runat="server" Text=""></asp:Label>
             </td>

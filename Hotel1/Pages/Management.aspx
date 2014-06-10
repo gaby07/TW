@@ -94,10 +94,10 @@
                 </asp:GridView>
                 <asp:SqlDataSource ID="SqlDataSource2" runat="server" 
                     ConnectionString="<%$ ConnectionStrings:Rezervari-Conexiune %>" 
-                    DeleteCommand="DELETE FROM [Camera] WHERE [Id] = @Id" 
-                    InsertCommand="INSERT INTO [Camera] ([Id], [Tip], [Pret], [AC], [Vedere], [Imagine]) VALUES (@Id, @Tip, @Pret, @AC, @Vedere, @Imagine)" 
-                    SelectCommand="SELECT * FROM [Camera] ORDER BY [Id]" 
-                    UpdateCommand="UPDATE [Camera] SET [Tip] = @Tip, [Pret] = @Pret, [AC] = @AC, [Vedere] = @Vedere, [Imagine] = @Imagine WHERE [Id] = @Id">
+                    DeleteCommand="DELETE FROM [Camere] WHERE [Id] = @Id" 
+                    InsertCommand="INSERT INTO [Camere] ([Id], [Tip], [Pret], [AC], [Vedere], [Imagine]) VALUES (@Id, @Tip, @Pret, @AC, @Vedere, @Imagine)" 
+                    SelectCommand="SELECT * FROM [Camere] ORDER BY [Id]" 
+                    UpdateCommand="UPDATE [Camere] SET [Tip] = @Tip, [Pret] = @Pret, [AC] = @AC, [Vedere] = @Vedere, [Imagine] = @Imagine WHERE [Id] = @Id">
                     <DeleteParameters>
                         <asp:Parameter Name="Id" Type="Int32" />
                     </DeleteParameters>
@@ -118,6 +118,14 @@
                         <asp:Parameter Name="Id" Type="Int32" />
                     </UpdateParameters>
                 </asp:SqlDataSource>
+                &nbsp;<br /> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                <asp:Button ID="Button1" runat="server" onclick="Button1_Click" Text="Aduga" />
+                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                <asp:TextBox ID="txtTip" runat="server" Width="110px"></asp:TextBox>
+                <asp:TextBox ID="txtPret" runat="server" Width="70px"></asp:TextBox>
+                <asp:TextBox ID="txtAC" runat="server" Width="70px"></asp:TextBox>
+                <asp:TextBox ID="txtVedere" runat="server" Width="110px"></asp:TextBox>
+                <asp:TextBox ID="txtImagine" runat="server"></asp:TextBox>
             </ContentTemplate>
         </asp:TabPanel>
         <asp:TabPanel runat="server" HeaderText="Rezervari" ID="TabPanel3">
