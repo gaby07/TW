@@ -12,8 +12,12 @@ public partial class Pages_Rezervari : System.Web.UI.Page
 
     protected void Page_Load(object sender, EventArgs e)
     {
-        Calendar1.SelectedDate = Convert.ToDateTime(Session["Data1"]);
-        Calendar2.SelectedDate = Convert.ToDateTime(Session["Data2"]);
+
+        if (!IsPostBack)
+        {
+            Calendar1.SelectedDate = DateTime.Now;
+            Calendar2.SelectedDate = DateTime.Now;
+        }
         txtData1.Text = Calendar1.SelectedDate.ToShortDateString();
         txtData2.Text = Calendar2.SelectedDate.ToShortDateString();
 

@@ -23,7 +23,7 @@ public class Conexiune
         comanda = new SqlCommand("", con);
 
         ArrayList list = new ArrayList();
-        string query = string.Format("select c.id, c.tip, c.vedere, c.ac, c.imagine, c.pret from camera c where  c.tip = '{0}' and not exists ( select * from rez r where r.idcam = c.id and (('{1}' >= r.data1 and '{1}' <= r.data2) or ('{2}' >= r.data1 and '{2}' <= r.data2) ));", tipCam, data1, data2);
+        string query = string.Format("select c.id, c.tip, c.vedere, c.ac, c.imagine, c.pret from camere c where  c.tip = '{0}' and not exists ( select * from rez r where r.idcam = c.id and (('{1}' >= r.data1 and '{1}' <= r.data2) or ('{2}' >= r.data1 and '{2}' <= r.data2) ));", tipCam, data1, data2);
 
         try
         {
@@ -49,6 +49,24 @@ public class Conexiune
             con.Close();
         }
         return list;
+    }
+
+    public static void AdaugaCamera (Camera camera) {
+        string connectionString = ConfigurationManager.ConnectionStrings["Rezervari-Conexiune"].ConnectionString;
+        con = new SqlConnection(connectionString);
+        comanda = new SqlCommand("", con);
+        try
+        {
+            con.Open();
+            string query = string.Format("INSERT INTO camere VALUES ('{0}', '{1}', '{2}', '{3}', '{4}')",camera.Tip, camera.Pret, camera.AC, camera.Vedere, camera.Imagine);
+            comanda.CommandText = query;
+            comanda.ExecuteNonQuery();
+            
+        }
+        finally
+        {
+            con.Close();
+        }
     }
 
     public static Utilizator Logare(string nume, string parola)
