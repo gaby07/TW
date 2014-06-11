@@ -19,8 +19,10 @@
                 <ul id = "nav">
                     <li><a href = "Home.aspx">Home</a></li>
                     <li><a href = "Rezervari.aspx">Rezervari</a></li>
-                    <li><a href = "Camere.aspx">Situatie Camere</a></li>
-                    <li><a href = "Management.aspx">Management</a></li>
+                    <li><a href = "Camere.aspx">Stare Camere</a></li>
+                    <li><a href = "Management.aspx">
+                        <asp:Label ID="Label1" runat="server" Text="Management" Visible="False"></asp:Label>
+                        </a></li>
                 </ul>
                 <div id = "Log"> 
                     <asp:Label ID="lblLogare" runat="server" Text="Logare" ForeColor="White"></asp:Label>

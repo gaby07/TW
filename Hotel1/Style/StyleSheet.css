@@ -49,7 +49,7 @@
     font-size: 24px;
     float: left;
     position: relative;
-    width: 180px;
+    padding-left: 40px;
     height: 50px;
 }
 
@@ -121,8 +121,9 @@
 
 #ContentPlaceHolder1_Panel1 div
 {
+   
     padding: 10px;
-    width: 800px;
+    width: 600px;
     height: 180px;
 }
 
@@ -172,3 +173,14 @@
     margin: 15px 10px 25px 10px;
 }
 
+.contact
+{
+    color: #333333;
+    font-family: ‘Palatino Linotype’, ‘Book Antiqua’, Palatino, serif;
+    margin: 15px 10px 25px 10px;
+}
+.text 
+{
+    color: #333333;
+    font-family: ‘Palatino Linotype’, ‘Book Antiqua’, Palatino, serif;
+}

@@ -9,10 +9,13 @@ public partial class MasterPage : System.Web.UI.MasterPage
 {
     protected void Page_Load(object sender, EventArgs e)
     {
+        if (Session["type"] == "admin") {
+            Label1.Visible = true;
+        }
         //checked if as User is logged in
         if (Session["login"] != null)
         {
-            lblLogare.Text = "welcome" + Session["login"].ToString();
+            lblLogare.Text = "welcome " + Session["login"].ToString();
             lblLogare.Visible = true;
             LinkButton1.Text = "Deconectare";
         }
