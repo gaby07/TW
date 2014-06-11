@@ -23,7 +23,9 @@ public partial class Pages_Rezervari : System.Web.UI.Page
 
         ArrayList camere = Conexiune.CautaCamera(ddlCam.SelectedValue, Calendar1.SelectedDate, Calendar1.SelectedDate);
         int nr = -1;
-
+            Camera cam = Conexiune.CautaOverbooking(ddlCam.SelectedValue, Calendar1.SelectedDate, Calendar1.SelectedDate);
+            camere.Add(cam);
+        
         foreach (Camera camera in camere)
         {
             nr++;

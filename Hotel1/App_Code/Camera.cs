@@ -13,6 +13,10 @@ public class Camera
     public string Vedere { get; set; }
     public string Imagine { get; set; }
 
+    public Camera()
+    {
+    }
+
 	public Camera(int id, string tip, int pret, string ac, string vedere, string imagine)
 	{
         Id = id;
