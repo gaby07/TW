@@ -10,24 +10,7 @@
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1" Runat="Server">
 
-<table><tr>
-    <td>
-        <asp:Image ID="Image1" runat="server" Height="150px" Width="176px" />
-    </td>
-    <td>
-    &nbsp;&nbsp;&nbsp;
-        <asp:Label ID="lblTip" runat="server" CssClass="CTip"></asp:Label>
-        <br />
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-        <asp:Label ID="lblVedere" runat="server" CssClass="CDescr"></asp:Label>
-        <br />
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-        <asp:Label ID="lblAC" runat="server" CssClass="CDescr"></asp:Label>
-        <br />
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-        <asp:Label ID="lblPret" runat="server" CssClass="CPret"></asp:Label>
-    </td>
-</table>
+
 <br />
 <table>
     <tr>

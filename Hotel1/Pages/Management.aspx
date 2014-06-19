@@ -119,7 +119,7 @@
                     </UpdateParameters>
                 </asp:SqlDataSource>
                 &nbsp;<br /> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                <asp:Button ID="Button1" runat="server" onclick="Button1_Click" Text="Aduga" />
+                <asp:Button ID="Button1" runat="server" onclick="Button1_Click" Text="Adauga" />
                 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
                 <asp:TextBox ID="txtTip" runat="server" Width="110px"></asp:TextBox>
                 <asp:TextBox ID="txtPret" runat="server" Width="70px"></asp:TextBox>

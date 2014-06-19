@@ -23,7 +23,7 @@ public class Conexiune
         comanda = new SqlCommand("", con);
 
         ArrayList list = new ArrayList();
-        string query = string.Format("select c.id, c.tip, c.vedere, c.ac, c.imagine, c.pret from camere c where  c.tip = '{0}' and not exists ( select * from rez r where r.idcam = c.id and (('{1}' >= r.data1 and '{1}' <= r.data2) or ('{2}' >= r.data1 and '{2}' <= r.data2) ));", tipCam, data1, data2);
+        string query = string.Format("select * from camere c where  c.tip = '{0}' and not exists ( select * from rezervari r where r.idcam = c.id and (('{1}' >= r.data1 and '{1}' <= r.data2) or ('{2}' >= r.data1 and '{2}' <= r.data2) ));", tipCam, data1, data2);
 
         try
         {
@@ -35,12 +35,15 @@ public class Conexiune
             {
                 int id = reader.GetInt32(0);
                 string tip = reader.GetString(1);
-                string vedere = reader.GetString(2);
-                string ac = reader.GetString(3);
-                string imagine = reader.GetString(4);
-                int pret = reader.GetInt32(5);
+                string detalii = reader.GetString(2);
+                string facilitati = reader.GetString(3);
+                string vedere = reader.GetString(4);
+                string imagini = reader.GetString(5);
+                int pret = reader.GetInt32(6);
+                int nr = reader.GetInt32(7);
+                int nrO = reader.GetInt32(8);
 
-                Camera camera = new Camera(id, tip, pret, ac, vedere,imagine);
+                Camera camera = new Camera(id, tip, detalii, facilitati, vedere, imagini, pret, nr, nrO);
                 list.Add(camera);
             }
         }
@@ -51,14 +54,14 @@ public class Conexiune
         return list;
     }
 
-    public static Camera CautaOverbooking(string tipCam, DateTime data1, DateTime data2)
+/*    public static Camera CautaOverbooking(string tipCam, DateTime data1, DateTime data2)
     {
         int id = 0;
         switch (tipCam)
         {
             case "single": id = 1;  break;
             case "dubla": id = 3;  break;
-            case "tripla": id = 6; break;
+            case "apartament": id = 6; break;
         }
 
 
@@ -105,7 +108,7 @@ public class Conexiune
         if (nr == 1) return cam;
         else return null;
     }
-
+*/
     public static void AdaugaCamera (Camera camera) {
         string connectionString = ConfigurationManager.ConnectionStrings["Rezervari-Conexiune"].ConnectionString;
         con = new SqlConnection(connectionString);
@@ -113,7 +116,7 @@ public class Conexiune
         try
         {
             con.Open();
-            string query = string.Format("INSERT INTO camere VALUES ('{0}', '{1}', '{2}', '{3}', '{4}')",camera.Tip, camera.Pret, camera.AC, camera.Vedere, camera.Imagine);
+            string query = string.Format("INSERT INTO camere VALUES ('{0}', '{1}', '{2}', '{3}', '{4}', '{5}', '{6}', '{7}')",camera.Tip, camera.Detalii, camera.Facilitati, camera.Vedere, camera.Imagini, camera.Pret, camera.Nr, camera.NrO);
             comanda.CommandText = query;
             comanda.ExecuteNonQuery();
             
@@ -220,7 +223,7 @@ public class Conexiune
         try
         {
             con.Open();
-            query = string.Format("INSERT INTO rez VALUES ('{0}', '{1}', '{2}', '{3}', '{4}', '{5}', '{6}', '{7}', '{8}')",  rez.IdCam, rez.Data1, rez.Data2, rez.Nume, rez.CNP, rez.Buletin, rez.Adresa, rez.Telefon, rez.Mail);
+            query = string.Format("INSERT INTO Rezervari VALUES ('{0}', '{1}', '{2}', '{3}', '{4}', '{5}', '{6}', '{7}', '{8}', null)",  rez.IdCam, rez.Data1, rez.Data2, rez.Nume, rez.CNP, rez.Buletin, rez.Adresa, rez.Telefon, rez.Mail);
             comanda.CommandText = query;
             comanda.ExecuteNonQuery();            
         }
@@ -228,7 +231,7 @@ public class Conexiune
         {
             con.Close();
         }
-        return "Camera a fost rezervata";
+        return "Veti primi un e-mail in care sunteti anuntati daca rezervarea a fost aprobata/respinsa.";
     }
  
 }

@@ -58,8 +58,9 @@
                 <asp:DropDownList ID="ddlCam" runat="server" AutoPostBack="True" 
                     onselectedindexchanged="ddlCam_SelectedIndexChanged">
                     <asp:ListItem>single</asp:ListItem>
-                    <asp:ListItem>dubla</asp:ListItem>
-                    <asp:ListItem>tripla</asp:ListItem>
+                    <asp:ListItem Value="dubla pat matrimonial">dubla cu pat matrimonial</asp:ListItem>
+                    <asp:ListItem Value="dubla doua paturi">dubla cu doua paturi</asp:ListItem>
+                    <asp:ListItem>apartament</asp:ListItem>
                 </asp:DropDownList>
             </td>
         </tr>

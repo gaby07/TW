@@ -16,8 +16,9 @@ public class Rezervare
     public string Adresa { get; set; }
     public string Telefon { get; set; }
     public string Mail { get; set; }
+    public string Stare { get; set; }
 
-	public Rezervare(int id, int idCam, DateTime data1, DateTime data2, string nume, string cnp, string buletin, string adresa, string tel, string mail)
+	public Rezervare(int id, int idCam, DateTime data1, DateTime data2, string nume, string cnp, string buletin, string adresa, string tel, string mail, string stare)
 	{
         Id = id;
         IdCam = idCam;
@@ -29,9 +30,10 @@ public class Rezervare
         Adresa = adresa;
         Telefon = tel;
         Mail = mail;
+        Stare = stare;
 	}
 
-    public Rezervare(int idCam, DateTime data1, DateTime data2, string nume, string cnp, string buletin, string adresa, string tel, string mail)
+    public Rezervare(int idCam, DateTime data1, DateTime data2, string nume, string cnp, string buletin, string adresa, string tel, string mail, string stare)
     {
         IdCam = idCam;
         Data1 = data1;
@@ -42,5 +44,6 @@ public class Rezervare
         Adresa = adresa;
         Telefon = tel;
         Mail = mail;
+        Stare = stare;
     }
 }

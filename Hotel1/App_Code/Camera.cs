@@ -8,31 +8,40 @@ public class Camera
 {
     public int Id { get; set; }
     public string Tip { get; set; }
-    public int Pret { get; set; }
-    public string AC { get; set; }
+    public string Detalii { get; set; }
+    public string Facilitati { get; set; }
     public string Vedere { get; set; }
-    public string Imagine { get; set; }
+    public string Imagini { get; set; }
+    public int Pret { get; set; }
+    public int Nr { get; set; }
+    public int NrO { get; set; }
 
     public Camera()
     {
     }
 
-	public Camera(int id, string tip, int pret, string ac, string vedere, string imagine)
+	public Camera(int id, string tip, string detalii, string facilitati, string vedere, string imagini, int pret, int nr, int nrO)
 	{
         Id = id;
         Tip = tip;
         Pret = pret;
-        AC = ac;
         Vedere = vedere;
-        Imagine = imagine;
+        Detalii = detalii;
+        Nr = nr;
+        NrO = nrO;
+        Imagini = imagini;
+        Facilitati = facilitati;
 	}
 
-    public Camera(string tip, int pret, string ac, string vedere, string imagine)
+    public Camera(string tip, string detalii, string facilitati, string vedere, string imagini, int pret, int nr, int nrO)
     {
         Tip = tip;
         Pret = pret;
-        AC = ac;
         Vedere = vedere;
-        Imagine = imagine;
+        Detalii = detalii;
+        Nr = nr;
+        NrO = nrO;
+        Imagini = imagini;
+        Facilitati = facilitati;
     }
 }

@@ -23,16 +23,17 @@ public partial class Pages_Rezervari : System.Web.UI.Page
 
         ArrayList camere = Conexiune.CautaCamera(ddlCam.SelectedValue, Calendar1.SelectedDate, Calendar1.SelectedDate);
         int nr = -1;
-            Camera cam = Conexiune.CautaOverbooking(ddlCam.SelectedValue, Calendar1.SelectedDate, Calendar1.SelectedDate);
-            camere.Add(cam);
+           /* Camera cam = Conexiune.CautaOverbooking(ddlCam.SelectedValue, Calendar1.SelectedDate, Calendar1.SelectedDate);
+            camere.Add(cam);*/
         
         foreach (Camera camera in camere)
         {
             nr++;
+            string[] Img = camera.Imagini.Split('|');
             Panel CamPanel = new Panel();
             Image image = new Image
             {
-                ImageUrl = camera.Imagine,
+                ImageUrl = Img[1],
                 CssClass = "CImg"
             };
 
@@ -49,14 +50,14 @@ public partial class Pages_Rezervari : System.Web.UI.Page
                 Text = "Camera " + camera.Tip,
                 CssClass = "CTip"
             };
-            Label lblVedere = new Label
+            Label lblDetalii = new Label
             {
-                Text = "Vedere spre " + camera.Vedere,
+                Text = camera.Detalii,
                 CssClass = "CDescr"
             };
-            Label lblAc = new Label
+            Label lblVedere = new Label
             {
-                Text = "Aer conditionat" + camera.AC,
+                Text = camera.Vedere,
                 CssClass = "CDescr"
             };
             Label lblPret = new Label
@@ -85,9 +86,9 @@ public partial class Pages_Rezervari : System.Web.UI.Page
             CamPanel.Controls.Add(image);
             CamPanel.Controls.Add(lblTip);
             CamPanel.Controls.Add(literal2);
-            CamPanel.Controls.Add(lblVedere);
+            CamPanel.Controls.Add(lblDetalii);
             CamPanel.Controls.Add(literal3);
-            CamPanel.Controls.Add(lblAc);
+            CamPanel.Controls.Add(lblVedere);
             CamPanel.Controls.Add(literal4);
             CamPanel.Controls.Add(lblPret);
             CamPanel.Controls.Add(literal5);
