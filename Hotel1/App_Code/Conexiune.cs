@@ -5,6 +5,8 @@ using System.Web;
 using System.Data.SqlClient;
 using System.Collections;
 using System.Configuration;
+using System.Net.Mail;
+using System.Net;
 
 
 public class Conexiune
@@ -223,7 +225,7 @@ public class Conexiune
         try
         {
             con.Open();
-            query = string.Format("INSERT INTO Rezervari VALUES ('{0}', '{1}', '{2}', '{3}', '{4}', '{5}', '{6}', '{7}', '{8}', null)",  rez.IdCam, rez.Data1, rez.Data2, rez.Nume, rez.CNP, rez.Buletin, rez.Adresa, rez.Telefon, rez.Mail);
+            query = string.Format("INSERT INTO Rezervari VALUES ('{0}', '{1}', '{2}', '{3}', '{4}', '{5}', '{6}', '{7}', '{8}', 'cerere')",  rez.IdCam, rez.Data1, rez.Data2, rez.Nume, rez.CNP, rez.Buletin, rez.Adresa, rez.Telefon, rez.Mail);
             comanda.CommandText = query;
             comanda.ExecuteNonQuery();            
         }
@@ -232,6 +234,64 @@ public class Conexiune
             con.Close();
         }
         return "Veti primi un e-mail in care sunteti anuntati daca rezervarea a fost aprobata/respinsa.";
+    }
+
+    public static void AcceptaCerere(string id, string mail)
+    {
+        string connectionString = ConfigurationManager.ConnectionStrings["Rezervari-Conexiune"].ConnectionString;
+        con = new SqlConnection(connectionString);
+        comanda = new SqlCommand("", con);
+        string query;
+
+        try
+        {
+            con.Open();
+            query = string.Format("UPDATE rezervari SET stare = 'rezervare' WHERE id = '{0}'", Convert.ToInt32(id));
+            comanda.CommandText = query;
+            comanda.ExecuteNonQuery();
+
+            TrimiteMail("Cererea dumneavoastra de rezervare a fost acceptata.", mail);
+ 
+        }
+        finally
+        {
+            con.Close();
+        }
+    }
+
+    public static void RespingeCerere(string id, string mail)
+    {
+        string connectionString = ConfigurationManager.ConnectionStrings["Rezervari-Conexiune"].ConnectionString;
+        con = new SqlConnection(connectionString);
+        comanda = new SqlCommand("", con);
+        string query;
+
+        try
+        {
+            con.Open();
+            query = string.Format("DELETE FROM rezervari WHERE id = '{0}'", Convert.ToInt32(id));
+            comanda.CommandText = query;
+            comanda.ExecuteNonQuery();
+
+            TrimiteMail("Cererea dumneavoastra de rezervare a fost respinsa.", mail);
+
+        }
+        finally
+        {
+            con.Close();
+        }
+    }
+
+    public static void TrimiteMail(string msgg, string to)
+    {
+        System.Net.Mail.MailMessage msg = new System.Net.Mail.MailMessage("maria.gaby1991@gmail.com", to, "Rezervari", msgg);
+
+        System.Net.NetworkCredential cred = new System.Net.NetworkCredential("maria.gaby1991@gmail.com", "Pasion07");
+        System.Net.Mail.SmtpClient mailClient = new System.Net.Mail.SmtpClient("smtp.gmail.com", 587);
+        mailClient.EnableSsl = true;
+        mailClient.UseDefaultCredentials = false;
+        mailClient.Credentials = cred;
+        mailClient.Send(msg); 
     }
  
 }

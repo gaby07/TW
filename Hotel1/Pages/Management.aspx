@@ -9,7 +9,7 @@
     </asp:ToolkitScriptManager>
     <br />
 
-    <asp:TabContainer ID="TabContainer1" runat="server" ActiveTabIndex="1" 
+    <asp:TabContainer ID="TabContainer1" runat="server" ActiveTabIndex="2" 
         Width="1046px" BackColor="White" BorderColor="White"  
         ForeColor="Black">
         <asp:TabPanel runat="server" HeaderText="Utilizatori" ID="TabPanel1">
@@ -70,17 +70,20 @@
                     CellPadding="4" ForeColor="#333333" GridLines="None">
                     <AlternatingRowStyle BackColor="White" />
                     <Columns>
-                        <asp:CommandField ShowDeleteButton="True" ShowEditButton="True" 
-                            ShowSelectButton="True" />
                         <asp:BoundField DataField="Id" HeaderText="Id" ReadOnly="True" 
-                            SortExpression="Id" />
+                            SortExpression="Id" InsertVisible="False" />
                         <asp:BoundField DataField="Tip" HeaderText="Tip" SortExpression="Tip" />
-                        <asp:BoundField DataField="Pret" HeaderText="Pret" SortExpression="Pret" />
-                        <asp:BoundField DataField="AC" HeaderText="AC" SortExpression="AC" />
+                        <asp:BoundField DataField="Detalii" HeaderText="Detalii" 
+                            SortExpression="Detalii" />
+                        <asp:BoundField DataField="Facilitati" HeaderText="Facilitati" 
+                            SortExpression="Facilitati" />
                         <asp:BoundField DataField="Vedere" HeaderText="Vedere" 
                             SortExpression="Vedere" />
-                        <asp:BoundField DataField="Imagine" HeaderText="Imagine" 
-                            SortExpression="Imagine" />
+                        <asp:BoundField DataField="Imagini" HeaderText="Imagini" 
+                            SortExpression="Imagini" />
+                        <asp:BoundField DataField="Pret" HeaderText="Pret" SortExpression="Pret" />
+                        <asp:BoundField DataField="Nr" HeaderText="Nr" SortExpression="Nr" />
+                        <asp:BoundField DataField="NrOv" HeaderText="NrOv" SortExpression="NrOv" />
                     </Columns>
                     <FooterStyle BackColor="#990000" Font-Bold="True" ForeColor="White" />
                     <HeaderStyle BackColor="#990000" Font-Bold="True" ForeColor="White" />
@@ -94,31 +97,9 @@
                 </asp:GridView>
                 <asp:SqlDataSource ID="SqlDataSource2" runat="server" 
                     ConnectionString="<%$ ConnectionStrings:Rezervari-Conexiune %>" 
-                    DeleteCommand="DELETE FROM [Camere] WHERE [Id] = @Id" 
-                    InsertCommand="INSERT INTO [Camere] ([Id], [Tip], [Pret], [AC], [Vedere], [Imagine]) VALUES (@Id, @Tip, @Pret, @AC, @Vedere, @Imagine)" 
-                    SelectCommand="SELECT * FROM [Camere] ORDER BY [Id]" 
-                    UpdateCommand="UPDATE [Camere] SET [Tip] = @Tip, [Pret] = @Pret, [AC] = @AC, [Vedere] = @Vedere, [Imagine] = @Imagine WHERE [Id] = @Id">
-                    <DeleteParameters>
-                        <asp:Parameter Name="Id" Type="Int32" />
-                    </DeleteParameters>
-                    <InsertParameters>
-                        <asp:Parameter Name="Id" Type="Int32" />
-                        <asp:Parameter Name="Tip" Type="String" />
-                        <asp:Parameter Name="Pret" Type="Int32" />
-                        <asp:Parameter Name="AC" Type="String" />
-                        <asp:Parameter Name="Vedere" Type="String" />
-                        <asp:Parameter Name="Imagine" Type="String" />
-                    </InsertParameters>
-                    <UpdateParameters>
-                        <asp:Parameter Name="Tip" Type="String" />
-                        <asp:Parameter Name="Pret" Type="Int32" />
-                        <asp:Parameter Name="AC" Type="String" />
-                        <asp:Parameter Name="Vedere" Type="String" />
-                        <asp:Parameter Name="Imagine" Type="String" />
-                        <asp:Parameter Name="Id" Type="Int32" />
-                    </UpdateParameters>
+                    SelectCommand="SELECT * FROM [Camere]">
                 </asp:SqlDataSource>
-                &nbsp;<br /> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                &nbsp;<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
                 <asp:Button ID="Button1" runat="server" onclick="Button1_Click" Text="Adauga" />
                 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
                 <asp:TextBox ID="txtTip" runat="server" Width="110px"></asp:TextBox>
@@ -128,22 +109,22 @@
                 <asp:TextBox ID="txtImagine" runat="server"></asp:TextBox>
             </ContentTemplate>
         </asp:TabPanel>
-        <asp:TabPanel runat="server" HeaderText="Rezervari" ID="TabPanel3">
+        <asp:TabPanel runat="server" HeaderText="Cereri" ID="TabPanel3">
             <ContentTemplate>
                 <asp:GridView ID="GridView3" runat="server" AutoGenerateColumns="False" 
-                    DataKeyNames="Id" DataSourceID="SqlDataSource3" Width="1024px" 
-                    CellPadding="4" ForeColor="#333333" GridLines="None">
+                    DataSourceID="SqlDataSource3" Width="1024px" 
+                    CellPadding="4" ForeColor="#333333" GridLines="None" DataKeyNames="Id" >
                     <AlternatingRowStyle BackColor="White" />
                     <Columns>
-                        <asp:CommandField ShowDeleteButton="True" ShowEditButton="True" 
-                            ShowSelectButton="True" />
-                        <asp:BoundField DataField="Id" HeaderText="Id" InsertVisible="False" 
-                            ReadOnly="True" SortExpression="Id" />
+                        <asp:CommandField ShowSelectButton="True" />
+                        <asp:BoundField DataField="Id" HeaderText="Id" SortExpression="Id" 
+                            InsertVisible="False" ReadOnly="True" />
                         <asp:BoundField DataField="IdCam" HeaderText="IdCam" SortExpression="IdCam" />
                         <asp:BoundField DataField="Data1" HeaderText="Data1" SortExpression="Data1" />
                         <asp:BoundField DataField="Data2" HeaderText="Data2" SortExpression="Data2" />
                         <asp:BoundField DataField="Nume" HeaderText="Nume" SortExpression="Nume" />
-                        <asp:BoundField DataField="CNP" HeaderText="CNP" SortExpression="CNP" />
+                        <asp:BoundField DataField="CNP" HeaderText="CNP" 
+                            SortExpression="CNP" />
                         <asp:BoundField DataField="Buletin" HeaderText="Buletin" 
                             SortExpression="Buletin" />
                         <asp:BoundField DataField="Adresa" HeaderText="Adresa" 
@@ -164,37 +145,18 @@
                 </asp:GridView>
                 <asp:SqlDataSource ID="SqlDataSource3" runat="server" 
                     ConnectionString="<%$ ConnectionStrings:Rezervari-Conexiune %>" 
-                    DeleteCommand="DELETE FROM [Rez] WHERE [Id] = @Id" 
-                    InsertCommand="INSERT INTO [Rez] ([IdCam], [Data1], [Data2], [Nume], [CNP], [Buletin], [Adresa], [Telefon], [Mail]) VALUES (@IdCam, @Data1, @Data2, @Nume, @CNP, @Buletin, @Adresa, @Telefon, @Mail)" 
-                    SelectCommand="SELECT * FROM [Rez] ORDER BY [Id]" 
-                    UpdateCommand="UPDATE [Rez] SET [IdCam] = @IdCam, [Data1] = @Data1, [Data2] = @Data2, [Nume] = @Nume, [CNP] = @CNP, [Buletin] = @Buletin, [Adresa] = @Adresa, [Telefon] = @Telefon, [Mail] = @Mail WHERE [Id] = @Id">
-                    <DeleteParameters>
-                        <asp:Parameter Name="Id" Type="Int32" />
-                    </DeleteParameters>
-                    <InsertParameters>
-                        <asp:Parameter Name="IdCam" Type="Int32" />
-                        <asp:Parameter DbType="Date" Name="Data1" />
-                        <asp:Parameter DbType="Date" Name="Data2" />
-                        <asp:Parameter Name="Nume" Type="String" />
-                        <asp:Parameter Name="CNP" Type="String" />
-                        <asp:Parameter Name="Buletin" Type="String" />
-                        <asp:Parameter Name="Adresa" Type="String" />
-                        <asp:Parameter Name="Telefon" Type="String" />
-                        <asp:Parameter Name="Mail" Type="String" />
-                    </InsertParameters>
-                    <UpdateParameters>
-                        <asp:Parameter Name="IdCam" Type="Int32" />
-                        <asp:Parameter DbType="Date" Name="Data1" />
-                        <asp:Parameter DbType="Date" Name="Data2" />
-                        <asp:Parameter Name="Nume" Type="String" />
-                        <asp:Parameter Name="CNP" Type="String" />
-                        <asp:Parameter Name="Buletin" Type="String" />
-                        <asp:Parameter Name="Adresa" Type="String" />
-                        <asp:Parameter Name="Telefon" Type="String" />
-                        <asp:Parameter Name="Mail" Type="String" />
-                        <asp:Parameter Name="Id" Type="Int32" />
-                    </UpdateParameters>
+                    
+                    
+                    SelectCommand="SELECT [Id], [IdCam], [Data1], [Data2], [Nume], [CNP], [Buletin], [Adresa], [Telefon], [Mail] FROM [Rezervari] WHERE ([Stare] = 'cerere')">
+                    <SelectParameters>
+                        <asp:Parameter DefaultValue="cerere" Name="Stare" Type="String" />
+                    </SelectParameters>
                 </asp:SqlDataSource>
+                <br />
+                <asp:Button ID="Button2" runat="server"  
+                    Text="Accepta" onclick="Button2_Click" />
+                <asp:Button ID="Button3" runat="server" Text="Respinge" 
+                    onclick="Button3_Click" />
             </ContentTemplate>
         </asp:TabPanel>
     </asp:TabContainer>

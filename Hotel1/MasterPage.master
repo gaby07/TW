@@ -13,9 +13,8 @@
     <form id="form1" runat="server">
         <div id = "wrapper">
             <div id = "banner">
-            </div>
-
-            <div id = "navigation">
+            </div><!--
+          --><div id = "navigation">
                 <ul id = "nav">
                     <li><a href = "Home.aspx">Home</a></li>
                     <li><a href = "Rezervari.aspx">Rezervari</a></li>
