@@ -18,15 +18,21 @@ public class Conexiune
 	{
 	}
 
-    public static ArrayList CautaCamera(string tipCam, DateTime data1, DateTime data2)
+    public static ArrayList CautaCamera(string tipCam, DateTime data1, DateTime data2, string prt)
     {
         string connectionString = ConfigurationManager.ConnectionStrings["Rezervari-Conexiune"].ConnectionString;
         con = new SqlConnection(connectionString);
         comanda = new SqlCommand("", con);
 
         ArrayList list = new ArrayList();
-        string query = string.Format("select * from camere c where  c.tip = '{0}' and (c.Nr+c.NrOv) >  ( select count(r.id) from rezervari r where r.idcam = c.id and (('{1}' >= r.data1 and '{1}' <= r.data2) or ('{2}' >= r.data1 and '{2}' <= r.data2)) and Stare <> 'anulata');", tipCam, data1, data2);
-
+        string query;
+        if (prt == "orice")
+            query = string.Format("select * from camere c where  c.tip = '{0}' and (c.Nr+c.NrOv) >  ( select count(r.id) from rezervari r where r.idcam = c.id and (('{1}' >= r.data1 and '{1}' <= r.data2) or ('{2}' >= r.data1 and '{2}' <= r.data2)) and Stare <> 'anulata' and Stare <> 'cerere');", tipCam, data1, data2);
+        else
+        {
+            string[] p = prt.Split('|');
+            query = string.Format("select * from camere c where  c.tip = '{0}' and pret >= '{1}' and pret <= '{2}' and (c.Nr+c.NrOv) >  ( select count(r.id) from rezervari r where r.idcam = c.id and (('{3}' >= r.data1 and '{3}' <= r.data2) or ('{4}' >= r.data1 and '{4}' <= r.data2)) and Stare <> 'anulata' and Stare <> 'cerere');", tipCam, Convert.ToInt32(p[0]), Convert.ToInt32(p[1]), data1, data2);
+        }
         try
         {
             con.Open();
@@ -268,7 +274,6 @@ public class Conexiune
         return nr;
     }
 
-
     public static int NrNopti(int id, string stare, DateTime data1, DateTime data2)
     {
         int nr = 0;
@@ -291,6 +296,35 @@ public class Conexiune
                 DateTime d1 = reader.GetDateTime(0);
                 DateTime d2 = reader.GetDateTime(1);
                 nr += (int)(d2 - d1).TotalDays;
+            }
+        }
+        finally
+        {
+            con.Close();
+        }
+        return nr;
+    }
+
+    public static int NrZi(int id, string stare, DateTime data)
+    {
+        int nr = 0;
+
+        string connectionString = ConfigurationManager.ConnectionStrings["Rezervari-Conexiune"].ConnectionString;
+        con = new SqlConnection(connectionString);
+        comanda = new SqlCommand("", con);
+
+        ArrayList list = new ArrayList();
+        string query = string.Format("select count(id) from [Rezervari].[dbo].[Rezervari] where IdCam = '{0}' and Stare = '{2}' and (Data1 >= '{1}' and Data2 <= '{1}')", id, data, stare);
+
+        try
+        {
+            con.Open();
+            comanda.CommandText = query;
+            SqlDataReader reader = comanda.ExecuteReader();
+
+            while (reader.Read())
+            {
+                nr = reader.GetInt32(0);
             }
         }
         finally

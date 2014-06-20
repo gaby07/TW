@@ -65,9 +65,19 @@
             </td>
         </tr>
         <tr>
-            <td></td>
             <td>
-                &nbsp;</td>
+                <asp:Label ID="Label1" runat="server" Text="Pret:"></asp:Label>
+            </td>
+            <td>
+                <asp:DropDownList ID="ddlPret" runat="server" AutoPostBack="True" 
+                    onselectedindexchanged="ddlCam_SelectedIndexChanged">
+                    <asp:ListItem>orice</asp:ListItem>
+                    <asp:ListItem Value="200|300">200 - 300 RON</asp:ListItem>
+                    <asp:ListItem Value="300|400">300 - 400 RON</asp:ListItem>
+                    <asp:ListItem Value="400|600">400 - 600 RON</asp:ListItem>
+                    <asp:ListItem Value="600|1000">peste 600 RON</asp:ListItem>
+                </asp:DropDownList>
+            </td>
         </tr>
     </table>
     <br />

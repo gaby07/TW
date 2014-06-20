@@ -4,6 +4,8 @@ using System.Linq;
 using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
+using System.Web.UI.DataVisualization.Charting;
+using System.Data;
 
 public partial class Pages_Management : System.Web.UI.Page
 {
@@ -27,8 +29,10 @@ public partial class Pages_Management : System.Web.UI.Page
 
     protected void Button1_Click(object sender, EventArgs e)
     {
-        //Camera camera = new Camera(txtTip.Text, (int)Convert.ToInt32(txtPret.Text), txtAC.Text, txtVedere.Text, txtImagine.Text);
-       // Conexiune.AdaugaCamera(camera);
+        AdImg.SaveAs(@"C:\Users\Maria\Documents\GitHub\TW\Hotel1\Imagini\" + AdImg.FileName);
+
+        Camera camera = new Camera(txtTip.Text, txtDetalii.Text, txtFacilitati.Text, txtVedere.Text, "../Imagini/"+AdImg.FileName, (int)Convert.ToInt32(txtPret.Text), (int)Convert.ToInt32(txtNr.Text), (int)Convert.ToInt32(txtNrO.Text));
+        Conexiune.AdaugaCamera(camera);
     }
     protected void Button2_Click(object sender, EventArgs e)
     {
@@ -89,16 +93,26 @@ public partial class Pages_Management : System.Web.UI.Page
         }
         else
         {
+            int na = Conexiune.NrNopti(Convert.ToInt32(ddlCam.SelectedValue), "anulata", Calendar1.SelectedDate, Calendar2.SelectedDate);
+            int no = Conexiune.NrNopti(Convert.ToInt32(ddlCam.SelectedValue), "onorata", Calendar1.SelectedDate, Calendar2.SelectedDate);
+            int nr = Conexiune.NrNopti(Convert.ToInt32(ddlCam.SelectedValue), "receptie", Calendar1.SelectedDate, Calendar2.SelectedDate);
+
             lblRez.Text = "Numar rezervari: " + "<table><tr><td>anulate: </td><td>" + Conexiune.NrRezervari(Convert.ToInt32(ddlCam.SelectedValue), "anulata", Calendar1.SelectedDate, Calendar2.SelectedDate).ToString() + "</td></tr>"
                                                      + "<tr><td>onorate: </td><td>" + Conexiune.NrRezervari(Convert.ToInt32(ddlCam.SelectedValue), "onorata", Calendar1.SelectedDate, Calendar2.SelectedDate).ToString() + "</td></tr>"
                                                      + "<tr><td>receptie: </td><td>" + Conexiune.NrRezervari(Convert.ToInt32(ddlCam.SelectedValue), "receptie", Calendar1.SelectedDate, Calendar2.SelectedDate).ToString() + "</td></tr>"
                                                      + "<tr><td>rezervari: </td><td>" + Conexiune.NrRezervari(Convert.ToInt32(ddlCam.SelectedValue), "rezervare", Calendar1.SelectedDate, Calendar2.SelectedDate).ToString() + "</td></tr></table>";
 
-            LblNopti.Text = "Numar nopti: " + "<table><tr><td>anulate: </td><td>" + Conexiune.NrNopti(Convert.ToInt32(ddlCam.SelectedValue), "anulata", Calendar1.SelectedDate, Calendar2.SelectedDate).ToString() + "</td></tr>"
-                                                   + "<tr><td>onorate: </td><td>" + Conexiune.NrNopti(Convert.ToInt32(ddlCam.SelectedValue), "onorata", Calendar1.SelectedDate, Calendar2.SelectedDate).ToString() + "</td></tr>"
-                                                   + "<tr><td>receptie: </td><td>" + Conexiune.NrNopti(Convert.ToInt32(ddlCam.SelectedValue), "receptie", Calendar1.SelectedDate, Calendar2.SelectedDate).ToString() + "</td></tr>"
+            LblNopti.Text = "Numar nopti: " + "<table><tr><td>anulate: </td><td>" + na.ToString() + "</td></tr>"
+                                                   + "<tr><td>onorate: </td><td>" + no.ToString() + "</td></tr>"
+                                                   + "<tr><td>receptie: </td><td>" + nr.ToString() + "</td></tr>"
                                                    + "<tr><td>rezervari: </td><td>" + Conexiune.NrNopti(Convert.ToInt32(ddlCam.SelectedValue), "rezervare", Calendar1.SelectedDate, Calendar2.SelectedDate).ToString() + "</td></tr></table>";
+        
+       /* PieChart1.PieChartValues.Add(new AjaxControlToolkit.PieChartValue { Category = "anulate", Data = na });
+        PieChart1.PieChartValues.Add(new AjaxControlToolkit.PieChartValue { Category = "onorate", Data = no });
+        PieChart1.PieChartValues.Add(new AjaxControlToolkit.PieChartValue { Category = "receptie", Data = nr });
+        PieChart1.PieChartValues.Add(new AjaxControlToolkit.PieChartValue { Category = "libere", Data =  (int)(Calendar2.SelectedDate-Calendar1.SelectedDate).TotalDays - na-no-nr});*/
+       
         }
     }
-    
+
 }

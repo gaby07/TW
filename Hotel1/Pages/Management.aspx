@@ -2,6 +2,8 @@
 
 <%@ Register assembly="AjaxControlToolkit" namespace="AjaxControlToolkit" tagprefix="asp" %>
 
+<%@ Register assembly="System.Web.DataVisualization, Version=4.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35" namespace="System.Web.UI.DataVisualization.Charting" tagprefix="asp" %>
+
 <asp:Content ID="Content1" ContentPlaceHolderID="head" Runat="Server">
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1" Runat="Server">
@@ -9,7 +11,7 @@
     </asp:ToolkitScriptManager>
     <br />
 
-    <asp:TabContainer ID="TabContainer1" runat="server" ActiveTabIndex="3" 
+    <asp:TabContainer ID="TabContainer1" runat="server" ActiveTabIndex="1" 
         Width="1046px" BackColor="#E9E9E9" BorderColor="#D1D1D1"  
         ForeColor="Black" BorderStyle="None">
         <asp:TabPanel runat="server" HeaderText="Utilizatori" ID="TabPanel1">
@@ -64,12 +66,16 @@
             </ContentTemplate>
         </asp:TabPanel>
         <asp:TabPanel runat="server" HeaderText="Camere" ID="TabPanel2">
+            <HeaderTemplate>
+                Camere
+            </HeaderTemplate>
             <ContentTemplate>
                 <asp:GridView ID="GridView2" runat="server" AutoGenerateColumns="False" 
                     DataKeyNames="Id" DataSourceID="SqlDataSource2" Width="1022px" 
                     CellPadding="4" ForeColor="#333333" GridLines="None">
                     <AlternatingRowStyle BackColor="White" />
                     <Columns>
+                        <asp:CommandField ShowDeleteButton="True" ShowEditButton="True" />
                         <asp:BoundField DataField="Id" HeaderText="Id" ReadOnly="True" 
                             SortExpression="Id" InsertVisible="False" />
                         <asp:BoundField DataField="Tip" HeaderText="Tip" SortExpression="Tip" />
@@ -97,16 +103,119 @@
                 </asp:GridView>
                 <asp:SqlDataSource ID="SqlDataSource2" runat="server" 
                     ConnectionString="<%$ ConnectionStrings:Rezervari-Conexiune %>" 
-                    SelectCommand="SELECT * FROM [Camere]">
+                    SelectCommand="SELECT * FROM [Camere]" 
+                    DeleteCommand="DELETE FROM [Camere] WHERE [Id] = @Id" 
+                    InsertCommand="INSERT INTO [Camere] ([Tip], [Detalii], [Facilitati], [Vedere], [Imagini], [Pret], [Nr], [NrOv]) VALUES (@Tip, @Detalii, @Facilitati, @Vedere, @Imagini, @Pret, @Nr, @NrOv)" 
+                    UpdateCommand="UPDATE [Camere] SET [Tip] = @Tip, [Detalii] = @Detalii, [Facilitati] = @Facilitati, [Vedere] = @Vedere, [Imagini] = @Imagini, [Pret] = @Pret, [Nr] = @Nr, [NrOv] = @NrOv WHERE [Id] = @Id">
+                    <DeleteParameters>
+                        <asp:Parameter Name="Id" Type="Int32" />
+                    </DeleteParameters>
+                    <InsertParameters>
+                        <asp:Parameter Name="Tip" Type="String" />
+                        <asp:Parameter Name="Detalii" Type="String" />
+                        <asp:Parameter Name="Facilitati" Type="String" />
+                        <asp:Parameter Name="Vedere" Type="String" />
+                        <asp:Parameter Name="Imagini" Type="String" />
+                        <asp:Parameter Name="Pret" Type="Int32" />
+                        <asp:Parameter Name="Nr" Type="Int32" />
+                        <asp:Parameter Name="NrOv" Type="Int32" />
+                    </InsertParameters>
+                    <UpdateParameters>
+                        <asp:Parameter Name="Tip" Type="String" />
+                        <asp:Parameter Name="Detalii" Type="String" />
+                        <asp:Parameter Name="Facilitati" Type="String" />
+                        <asp:Parameter Name="Vedere" Type="String" />
+                        <asp:Parameter Name="Imagini" Type="String" />
+                        <asp:Parameter Name="Pret" Type="Int32" />
+                        <asp:Parameter Name="Nr" Type="Int32" />
+                        <asp:Parameter Name="NrOv" Type="Int32" />
+                        <asp:Parameter Name="Id" Type="Int32" />
+                    </UpdateParameters>
                 </asp:SqlDataSource>
-                &nbsp;<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                <asp:Button ID="Button1" runat="server" onclick="Button1_Click" Text="Adauga" />
-                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                <asp:TextBox ID="txtTip" runat="server" Width="110px"></asp:TextBox>
-                <asp:TextBox ID="txtPret" runat="server" Width="70px"></asp:TextBox>
-                <asp:TextBox ID="txtAC" runat="server" Width="70px"></asp:TextBox>
-                <asp:TextBox ID="txtVedere" runat="server" Width="110px"></asp:TextBox>
-                <asp:TextBox ID="txtImagine" runat="server"></asp:TextBox>
+                <br />
+                Adaugare camera<br />
+                <br />
+                <table>
+                    <tr>
+                        <td>
+                            <asp:Label ID="lblTip" runat="server" Text="Tip: "></asp:Label>
+                        </td>
+                        <td>
+                            <asp:TextBox ID="txtTip" runat="server"></asp:TextBox>
+                            <asp:RequiredFieldValidator ValidationGroup="ad" ID="RequiredFieldValidator1" runat="server" 
+                                ErrorMessage="*" ControlToValidate="txtTip"></asp:RequiredFieldValidator>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <asp:Label ID="lblDetalii" runat="server" Text="Detalii: "></asp:Label>
+                        </td>
+                        <td>
+                            <asp:TextBox ValidationGroup="ad" ID="txtDetalii" runat="server" TextMode="MultiLine"></asp:TextBox>
+                            <asp:RequiredFieldValidator ID="RequiredFieldValidator2" runat="server" 
+                                ErrorMessage="*" ControlToValidate="txtDetalii"></asp:RequiredFieldValidator>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <asp:Label ID="lblFacilitati" runat="server" Text="Facilitati: "></asp:Label>
+                        </td>
+                        <td>
+                            <asp:TextBox ID="txtFacilitati" runat="server" TextMode="MultiLine" ></asp:TextBox>
+                            <asp:RequiredFieldValidator ValidationGroup="ad" ID="RequiredFieldValidator3" runat="server" 
+                                ErrorMessage="*" ControlToValidate="txtFacilitati"></asp:RequiredFieldValidator>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <asp:Label ID="lblVedere" runat="server" Text="Vedere: "></asp:Label>
+                        </td>
+                        <td>
+                            <asp:TextBox ID="txtVedere" runat="server" ></asp:TextBox>
+                            <asp:RequiredFieldValidator ValidationGroup="ad" ID="RequiredFieldValidator4" runat="server" 
+                                ErrorMessage="*" ControlToValidate="txtVedere"></asp:RequiredFieldValidator>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <asp:Label ID="lblPret" runat="server" Text="Pret: "></asp:Label>
+                        </td>
+                        <td>
+                            <asp:TextBox ID="txtPret" runat="server"></asp:TextBox>
+                            <asp:RequiredFieldValidator ValidationGroup="ad" ID="RequiredFieldValidator5" runat="server" 
+                                ErrorMessage="*" ControlToValidate="txtPret"></asp:RequiredFieldValidator>
+                            <asp:RegularExpressionValidator ValidationGroup="ad" ID="RegularExpressionValidator1" ControlToValidate="txtPret" runat="server" ErrorMessage="Only Numbers allowed" ValidationExpression="\d+"></asp:RegularExpressionValidator>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <asp:Label ID="lblNr" runat="server" Text="Nr camere: "></asp:Label>
+                        </td>
+                        <td>
+                            <asp:TextBox ID="txtNr" runat="server"></asp:TextBox>
+                            <asp:RequiredFieldValidator ValidationGroup="ad" ID="RequiredFieldValidator7" runat="server" 
+                                ErrorMessage="*" ControlToValidate="txtNr"></asp:RequiredFieldValidator>
+                            <asp:RegularExpressionValidator ValidationGroup="ad" ID="RegularExpressionValidator2" ControlToValidate="txtNr" runat="server" ErrorMessage="Only Numbers allowed" ValidationExpression="\d+"></asp:RegularExpressionValidator>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <asp:Label ID="lblNrO" runat="server" Text="Nr overbooking: "></asp:Label>
+                        </td>
+                        <td>
+                            <asp:TextBox ID="txtNrO" runat="server"></asp:TextBox>
+                            <asp:RequiredFieldValidator ValidationGroup="ad" ID="RequiredFieldValidator6" runat="server" 
+                                ErrorMessage="*" ControlToValidate="txtNrO"></asp:RequiredFieldValidator>
+                            <asp:RegularExpressionValidator ValidationGroup="ad" ID="RegularExpressionValidator3" ControlToValidate="txtNrO" runat="server" ErrorMessage="Only Numbers allowed" ValidationExpression="\d+" ></asp:RegularExpressionValidator>
+                        </td>
+                    </tr>
+                </table>
+
+                <asp:FileUpload ID="AdImg" runat="server" />
+                <br />
+
+                <asp:Button ValidationGroup="ad" ID="Button1" runat="server" 
+                    onclick="Button1_Click" Text="Adauga" PostBackUrl="~/Pages/Management.aspx" />
             </ContentTemplate>
         </asp:TabPanel>
         <asp:TabPanel runat="server" HeaderText="Cereri" ID="TabPanel3">
@@ -255,6 +364,16 @@
                 <asp:Label ID="lblRez" runat="server"></asp:Label>
                 <br />
                 <asp:Label ID="LblNopti" runat="server"></asp:Label>
+                <asp:Chart ID="Chart1" runat="server">
+                    <series>
+                        <asp:Series Name="Series1" ChartArea="ChartArea1">
+                        </asp:Series>
+                    </series>
+                    <chartareas>
+                        <asp:ChartArea Name="ChartArea1">
+                        </asp:ChartArea>
+                    </chartareas>
+                </asp:Chart>
             </ContentTemplate>
         </asp:TabPanel>
     </asp:TabContainer>
