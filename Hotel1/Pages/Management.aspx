@@ -9,9 +9,9 @@
     </asp:ToolkitScriptManager>
     <br />
 
-    <asp:TabContainer ID="TabContainer1" runat="server" ActiveTabIndex="2" 
-        Width="1046px" BackColor="White" BorderColor="White"  
-        ForeColor="Black">
+    <asp:TabContainer ID="TabContainer1" runat="server" ActiveTabIndex="3" 
+        Width="1046px" BackColor="#E9E9E9" BorderColor="#D1D1D1"  
+        ForeColor="Black" BorderStyle="None">
         <asp:TabPanel runat="server" HeaderText="Utilizatori" ID="TabPanel1">
             <HeaderTemplate>
                 Utilizatori
@@ -157,6 +157,102 @@
                     Text="Accepta" onclick="Button2_Click" />
                 <asp:Button ID="Button3" runat="server" Text="Respinge" 
                     onclick="Button3_Click" />
+            </ContentTemplate>
+        </asp:TabPanel>
+        <asp:TabPanel ID="TabPanel4" runat="server" HeaderText="TabPanel4">
+            <HeaderTemplate>
+                Rapoarte
+            </HeaderTemplate>
+            <ContentTemplate>
+                <table>
+                    <tr>
+                        <td>
+                            <asp:Label ID="Data1" runat="server" Text="Data 1:"></asp:Label>
+                        </td>
+                        <td>
+                            <asp:TextBox ID="txtData1" runat="server" Enabled="False" 
+                                ontextchanged="txtData1_TextChanged"></asp:TextBox>
+                        </td>
+                        <td>
+                            <asp:ImageButton ID="ImageButton1" runat="server" Height="23px" 
+                                ImageUrl="~/Images/calendar.png" onclick="ImageButton1_Click" Width="23px" />
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                        </td>
+                        <td>
+                            <asp:Calendar ID="Calendar1" runat="server" Height="90px" 
+                                onselectionchanged="Calendar1_SelectionChanged" Visible="False" Width="90px">
+                            </asp:Calendar>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <asp:Label ID="lblData2" runat="server" Text="Data 2:"></asp:Label>
+                        </td>
+                        <td>
+                            <asp:TextBox ID="txtData2" runat="server" Enabled="False" 
+                                ontextchanged="txtData2_TextChanged"></asp:TextBox>
+                        </td>
+                        <td>
+                            <asp:ImageButton ID="ImageButton2" runat="server" Height="23px" 
+                                ImageUrl="~/Images/calendar.png" onclick="ImageButton2_Click" Width="23px" />
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                        </td>
+                        <td>
+                            <asp:Calendar ID="Calendar2" runat="server" Height="90px" 
+                                onselectionchanged="Calendar2_SelectionChanged" Visible="False" Width="90px">
+                            </asp:Calendar>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            &nbsp;</td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <asp:Label ID="lblCam" runat="server" Text="Tip camera:"></asp:Label>
+                        </td>
+                        <td>
+                            <asp:DropDownList ID="ddlCam" runat="server" AutoPostBack="True" 
+                                onselectedindexchanged="ddlCam_SelectedIndexChanged">
+                                <asp:ListItem Value="1">single</asp:ListItem>
+                                <asp:ListItem Value="2">single lux</asp:ListItem>
+                                <asp:ListItem Value="3">dubla cu pat matrimonial</asp:ListItem>
+                                <asp:ListItem Value="4">dubla cu pat matrimonial lux</asp:ListItem>
+                                <asp:ListItem Value="5">dubla cu doua paturi</asp:ListItem>
+                                <asp:ListItem Value="6">dubla cu doua paturi lux</asp:ListItem>
+                                <asp:ListItem Value="7">apartament</asp:ListItem>
+                                <asp:ListItem Value="8">apartament lux</asp:ListItem>
+                                <asp:ListItem Value="9">apartament lux + sala sedinte</asp:ListItem>
+                            </asp:DropDownList>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            Tip rezervare:
+                        </td>
+                        <td>
+                            <asp:DropDownList ID="ddlRez" runat="server" AutoPostBack="True" 
+                                onselectedindexchanged="ddlRez_SelectedIndexChanged">
+                                <asp:ListItem>anulata</asp:ListItem>
+                                <asp:ListItem>onorata</asp:ListItem>
+                                <asp:ListItem>receptie</asp:ListItem>
+                            </asp:DropDownList>
+                        </td>
+                    </tr>
+                </table>
+                <br />
+                <asp:Button ID="Raport" runat="server" Text="Raport" onclick="Raport_Click" />
+                <br />
+                <br />
+                <asp:Label ID="lblRez" runat="server"></asp:Label>
+                <br />
+                <asp:Label ID="LblNopti" runat="server"></asp:Label>
             </ContentTemplate>
         </asp:TabPanel>
     </asp:TabContainer>

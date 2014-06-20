@@ -25,7 +25,7 @@ public class Conexiune
         comanda = new SqlCommand("", con);
 
         ArrayList list = new ArrayList();
-        string query = string.Format("select * from camere c where  c.tip = '{0}' and not exists ( select * from rezervari r where r.idcam = c.id and (('{1}' >= r.data1 and '{1}' <= r.data2) or ('{2}' >= r.data1 and '{2}' <= r.data2) ));", tipCam, data1, data2);
+        string query = string.Format("select * from camere c where  c.tip = '{0}' and (c.Nr+c.NrOv) >  ( select count(r.id) from rezervari r where r.idcam = c.id and (('{1}' >= r.data1 and '{1}' <= r.data2) or ('{2}' >= r.data1 and '{2}' <= r.data2)) and Stare <> 'anulata');", tipCam, data1, data2);
 
         try
         {
@@ -56,61 +56,6 @@ public class Conexiune
         return list;
     }
 
-/*    public static Camera CautaOverbooking(string tipCam, DateTime data1, DateTime data2)
-    {
-        int id = 0;
-        switch (tipCam)
-        {
-            case "single": id = 1;  break;
-            case "dubla": id = 3;  break;
-            case "apartament": id = 6; break;
-        }
-
-
-        string connectionString = ConfigurationManager.ConnectionStrings["Rezervari-Conexiune"].ConnectionString;
-        con = new SqlConnection(connectionString);
-        comanda = new SqlCommand("", con);
-
-        ArrayList list = new ArrayList();
-        string query = string.Format(" select count(id) from rez r where r.idcam = '{0}' and (('{1}' >= r.data1 and '{1}' <= r.data2) or ('{2}' >= r.data1 and '{2}' <= r.data2) );", id, data1, data2);
-        int nr = 0;
-        Camera cam = new Camera();
-        try
-        {
-            con.Open();
-            comanda.CommandText = query;
-            SqlDataReader reader = comanda.ExecuteReader();
-            while (reader.Read()) {
-                nr = reader.GetInt32(0);
-            }
-            reader.Close();
-            if (nr == 1)
-            {
-                query = string.Format(" select * from camere where id = '{0}'", id);
-                comanda.CommandText = query;
-                reader = comanda.ExecuteReader();
-
-                while (reader.Read())
-                {
-                    id = reader.GetInt32(0);
-                    string tip = reader.GetString(1);
-                    int pret = reader.GetInt32(2);
-                    string vedere = reader.GetString(3);
-                    string ac = reader.GetString(4);
-                    string imagine = reader.GetString(5);
-
-                    cam = new Camera(id, tip, pret, ac, vedere, imagine);
-                }
-            }
-        }
-        finally
-        {
-            con.Close();
-        }
-        if (nr == 1) return cam;
-        else return null;
-    }
-*/
     public static void AdaugaCamera (Camera camera) {
         string connectionString = ConfigurationManager.ConnectionStrings["Rezervari-Conexiune"].ConnectionString;
         con = new SqlConnection(connectionString);
@@ -293,5 +238,65 @@ public class Conexiune
         mailClient.Credentials = cred;
         mailClient.Send(msg); 
     }
- 
+
+    public static int NrRezervari(int id, string stare, DateTime data1, DateTime data2)
+    {
+        int nr = 0;
+
+        string connectionString = ConfigurationManager.ConnectionStrings["Rezervari-Conexiune"].ConnectionString;
+        con = new SqlConnection(connectionString);
+        comanda = new SqlCommand("", con);
+
+        ArrayList list = new ArrayList();
+        string query = string.Format("select COUNT(id) from [Rezervari].[dbo].[Rezervari] where IdCam = '{0}' and Stare = '{3}' and (Data1 > '{1}' and Data1 < '{2}') and (Data2 > '{1}' and Data2 < '{2}')", id, data1, data2, stare);
+
+        try
+        {
+            con.Open();
+            comanda.CommandText = query;
+            SqlDataReader reader = comanda.ExecuteReader();
+
+            while (reader.Read())
+            {
+                nr = reader.GetInt32(0);
+            }
+        }
+        finally
+        {
+            con.Close();
+        }
+        return nr;
+    }
+
+
+    public static int NrNopti(int id, string stare, DateTime data1, DateTime data2)
+    {
+        int nr = 0;
+
+        string connectionString = ConfigurationManager.ConnectionStrings["Rezervari-Conexiune"].ConnectionString;
+        con = new SqlConnection(connectionString);
+        comanda = new SqlCommand("", con);
+
+        ArrayList list = new ArrayList();
+        string query = string.Format("select Data1, Data2 from [Rezervari].[dbo].[Rezervari] where IdCam = '{0}' and Stare = '{3}' and (Data1 > '{1}' and Data1 < '{2}') and (Data2 > '{1}' and Data2 < '{2}')", id, data1, data2, stare);
+
+        try
+        {
+            con.Open();
+            comanda.CommandText = query;
+            SqlDataReader reader = comanda.ExecuteReader();
+
+            while (reader.Read())
+            {
+                DateTime d1 = reader.GetDateTime(0);
+                DateTime d2 = reader.GetDateTime(1);
+                nr += (int)(d2 - d1).TotalDays;
+            }
+        }
+        finally
+        {
+            con.Close();
+        }
+        return nr;
+    }
 }
