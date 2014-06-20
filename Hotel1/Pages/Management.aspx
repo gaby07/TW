@@ -239,9 +239,11 @@
                         <td>
                             <asp:DropDownList ID="ddlRez" runat="server" AutoPostBack="True" 
                                 onselectedindexchanged="ddlRez_SelectedIndexChanged">
+                                <asp:ListItem>toate</asp:ListItem>
                                 <asp:ListItem>anulata</asp:ListItem>
                                 <asp:ListItem>onorata</asp:ListItem>
                                 <asp:ListItem>receptie</asp:ListItem>
+                                <asp:ListItem>rezervare</asp:ListItem>
                             </asp:DropDownList>
                         </td>
                     </tr>

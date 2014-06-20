@@ -82,8 +82,23 @@ public partial class Pages_Management : System.Web.UI.Page
 
     protected void Raport_Click(object sender, EventArgs e)
     {
-        lblRez.Text = "Numar rezervari: " + Conexiune.NrRezervari(Convert.ToInt32(ddlCam.SelectedValue), ddlRez.SelectedValue, Calendar1.SelectedDate, Calendar2.SelectedDate).ToString();
-        LblNopti.Text = "Numar nopti: " + Conexiune.NrNopti(Convert.ToInt32(ddlCam.SelectedValue), ddlRez.SelectedValue, Calendar1.SelectedDate, Calendar2.SelectedDate).ToString();
+        if (ddlRez.SelectedValue != "toate")
+        {
+            lblRez.Text = "Numar rezervari: " + Conexiune.NrRezervari(Convert.ToInt32(ddlCam.SelectedValue), ddlRez.SelectedValue, Calendar1.SelectedDate, Calendar2.SelectedDate).ToString();
+            LblNopti.Text = "Numar nopti: " + Conexiune.NrNopti(Convert.ToInt32(ddlCam.SelectedValue), ddlRez.SelectedValue, Calendar1.SelectedDate, Calendar2.SelectedDate).ToString();
+        }
+        else
+        {
+            lblRez.Text = "Numar rezervari: " + "<table><tr><td>anulate: </td><td>" + Conexiune.NrRezervari(Convert.ToInt32(ddlCam.SelectedValue), "anulata", Calendar1.SelectedDate, Calendar2.SelectedDate).ToString() + "</td></tr>"
+                                                     + "<tr><td>onorate: </td><td>" + Conexiune.NrRezervari(Convert.ToInt32(ddlCam.SelectedValue), "onorata", Calendar1.SelectedDate, Calendar2.SelectedDate).ToString() + "</td></tr>"
+                                                     + "<tr><td>receptie: </td><td>" + Conexiune.NrRezervari(Convert.ToInt32(ddlCam.SelectedValue), "receptie", Calendar1.SelectedDate, Calendar2.SelectedDate).ToString() + "</td></tr>"
+                                                     + "<tr><td>rezervari: </td><td>" + Conexiune.NrRezervari(Convert.ToInt32(ddlCam.SelectedValue), "rezervare", Calendar1.SelectedDate, Calendar2.SelectedDate).ToString() + "</td></tr></table>";
+
+            LblNopti.Text = "Numar nopti: " + "<table><tr><td>anulate: </td><td>" + Conexiune.NrNopti(Convert.ToInt32(ddlCam.SelectedValue), "anulata", Calendar1.SelectedDate, Calendar2.SelectedDate).ToString() + "</td></tr>"
+                                                   + "<tr><td>onorate: </td><td>" + Conexiune.NrNopti(Convert.ToInt32(ddlCam.SelectedValue), "onorata", Calendar1.SelectedDate, Calendar2.SelectedDate).ToString() + "</td></tr>"
+                                                   + "<tr><td>receptie: </td><td>" + Conexiune.NrNopti(Convert.ToInt32(ddlCam.SelectedValue), "receptie", Calendar1.SelectedDate, Calendar2.SelectedDate).ToString() + "</td></tr>"
+                                                   + "<tr><td>rezervari: </td><td>" + Conexiune.NrNopti(Convert.ToInt32(ddlCam.SelectedValue), "rezervare", Calendar1.SelectedDate, Calendar2.SelectedDate).ToString() + "</td></tr></table>";
+        }
     }
     
 }
