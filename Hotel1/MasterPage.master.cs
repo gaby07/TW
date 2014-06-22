@@ -13,7 +13,7 @@ public partial class MasterPage : System.Web.UI.MasterPage
         //checked if as User is logged in
         if (Session["login"] != null)
         {
-            lblLogare.Text = "welcome " + Session["login"].ToString();
+            lblLogare.Text = Session["login"].ToString();
             lblLogare.Visible = true;
             LinkButton1.Text = "Deconectare";
             if (Session["type"].ToString() == "admin")

@@ -100,11 +100,13 @@ public partial class Pages_Management : System.Web.UI.Page
             lblRez.Text = "Numar rezervari: " + "<table><tr><td>anulate: </td><td>" + Conexiune.NrRezervari(Convert.ToInt32(ddlCam.SelectedValue), "anulata", Calendar1.SelectedDate, Calendar2.SelectedDate).ToString() + "</td></tr>"
                                                      + "<tr><td>onorate: </td><td>" + Conexiune.NrRezervari(Convert.ToInt32(ddlCam.SelectedValue), "onorata", Calendar1.SelectedDate, Calendar2.SelectedDate).ToString() + "</td></tr>"
                                                      + "<tr><td>receptie: </td><td>" + Conexiune.NrRezervari(Convert.ToInt32(ddlCam.SelectedValue), "receptie", Calendar1.SelectedDate, Calendar2.SelectedDate).ToString() + "</td></tr>"
+                                                     + "<tr><td>despagubiri: </td><td>" + Conexiune.NrRezervari(Convert.ToInt32(ddlCam.SelectedValue), "despagubire", Calendar1.SelectedDate, Calendar2.SelectedDate).ToString() + "</td></tr>"
                                                      + "<tr><td>rezervari: </td><td>" + Conexiune.NrRezervari(Convert.ToInt32(ddlCam.SelectedValue), "rezervare", Calendar1.SelectedDate, Calendar2.SelectedDate).ToString() + "</td></tr></table>";
 
             LblNopti.Text = "Numar nopti: " + "<table><tr><td>anulate: </td><td>" + na.ToString() + "</td></tr>"
                                                    + "<tr><td>onorate: </td><td>" + no.ToString() + "</td></tr>"
                                                    + "<tr><td>receptie: </td><td>" + nr.ToString() + "</td></tr>"
+                                                   + "<tr><td>despagubiri: </td><td>" + Conexiune.NrNopti(Convert.ToInt32(ddlCam.SelectedValue), "despagubirq", Calendar1.SelectedDate, Calendar2.SelectedDate).ToString() + "</td></tr>"
                                                    + "<tr><td>rezervari: </td><td>" + Conexiune.NrNopti(Convert.ToInt32(ddlCam.SelectedValue), "rezervare", Calendar1.SelectedDate, Calendar2.SelectedDate).ToString() + "</td></tr></table>";
         
        /* PieChart1.PieChartValues.Add(new AjaxControlToolkit.PieChartValue { Category = "anulate", Data = na });
@@ -114,5 +116,4 @@ public partial class Pages_Management : System.Web.UI.Page
        
         }
     }
-
 }

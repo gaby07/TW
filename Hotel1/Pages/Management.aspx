@@ -5,14 +5,14 @@
 <%@ Register assembly="System.Web.DataVisualization, Version=4.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35" namespace="System.Web.UI.DataVisualization.Charting" tagprefix="asp" %>
 
 <asp:Content ID="Content1" ContentPlaceHolderID="head" Runat="Server">
-</asp:Content>
+    </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1" Runat="Server">
     <asp:ToolkitScriptManager ID="ToolkitScriptManager1" runat="server">
     </asp:ToolkitScriptManager>
     <br />
 
-    <asp:TabContainer ID="TabContainer1" runat="server" ActiveTabIndex="1" 
-        Width="1046px" BackColor="#E9E9E9" BorderColor="#D1D1D1"  
+    <asp:TabContainer ID="TabContainer1" runat="server" ActiveTabIndex="3" 
+        Width="1115px" BackColor="#E9E9E9" BorderColor="#D1D1D1"  
         ForeColor="Black" BorderStyle="None">
         <asp:TabPanel runat="server" HeaderText="Utilizatori" ID="TabPanel1">
             <HeaderTemplate>
@@ -24,8 +24,7 @@
                     CellPadding="4" ForeColor="#333333" GridLines="None">
                     <AlternatingRowStyle BackColor="White" />
                     <Columns>
-                        <asp:CommandField ShowDeleteButton="True" ShowEditButton="True" 
-                            ShowSelectButton="True" />
+                        <asp:CommandField ShowDeleteButton="True" ShowEditButton="True" />
                         <asp:BoundField DataField="id" HeaderText="id" InsertVisible="False" 
                             ReadOnly="True" SortExpression="id" />
                         <asp:BoundField DataField="nume" HeaderText="nume" SortExpression="nume" />
@@ -71,7 +70,7 @@
             </HeaderTemplate>
             <ContentTemplate>
                 <asp:GridView ID="GridView2" runat="server" AutoGenerateColumns="False" 
-                    DataKeyNames="Id" DataSourceID="SqlDataSource2" Width="1022px" 
+                    DataKeyNames="Id" DataSourceID="SqlDataSource2" Width="1086px" 
                     CellPadding="4" ForeColor="#333333" GridLines="None">
                     <AlternatingRowStyle BackColor="White" />
                     <Columns>
@@ -151,8 +150,8 @@
                             <asp:Label ID="lblDetalii" runat="server" Text="Detalii: "></asp:Label>
                         </td>
                         <td>
-                            <asp:TextBox ValidationGroup="ad" ID="txtDetalii" runat="server" TextMode="MultiLine"></asp:TextBox>
-                            <asp:RequiredFieldValidator ID="RequiredFieldValidator2" runat="server" 
+                            <asp:TextBox  ID="txtDetalii" runat="server" TextMode="MultiLine"></asp:TextBox>
+                            <asp:RequiredFieldValidator ValidationGroup="ad" ID="RequiredFieldValidator2" runat="server" 
                                 ErrorMessage="*" ControlToValidate="txtDetalii"></asp:RequiredFieldValidator>
                         </td>
                     </tr>
@@ -221,7 +220,7 @@
         <asp:TabPanel runat="server" HeaderText="Cereri" ID="TabPanel3">
             <ContentTemplate>
                 <asp:GridView ID="GridView3" runat="server" AutoGenerateColumns="False" 
-                    DataSourceID="SqlDataSource3" Width="1024px" 
+                    DataSourceID="SqlDataSource3" Width="1088px" 
                     CellPadding="4" ForeColor="#333333" GridLines="None" DataKeyNames="Id" >
                     <AlternatingRowStyle BackColor="White" />
                     <Columns>
@@ -276,7 +275,7 @@
                 <table>
                     <tr>
                         <td>
-                            <asp:Label ID="Data1" runat="server" Text="Data 1:"></asp:Label>
+                            <asp:Label ID="Data1" runat="server" Text="Check-in:"></asp:Label>
                         </td>
                         <td>
                             <asp:TextBox ID="txtData1" runat="server" Enabled="False" 
@@ -298,7 +297,7 @@
                     </tr>
                     <tr>
                         <td>
-                            <asp:Label ID="lblData2" runat="server" Text="Data 2:"></asp:Label>
+                            <asp:Label ID="lblData2" runat="server" Text="Check-out:"></asp:Label>
                         </td>
                         <td>
                             <asp:TextBox ID="txtData2" runat="server" Enabled="False" 
@@ -329,6 +328,7 @@
                         <td>
                             <asp:DropDownList ID="ddlCam" runat="server" AutoPostBack="True" 
                                 onselectedindexchanged="ddlCam_SelectedIndexChanged">
+                                <asp:ListItem Value="0">toate</asp:ListItem>
                                 <asp:ListItem Value="1">single</asp:ListItem>
                                 <asp:ListItem Value="2">single lux</asp:ListItem>
                                 <asp:ListItem Value="3">dubla cu pat matrimonial</asp:ListItem>
@@ -352,6 +352,7 @@
                                 <asp:ListItem>anulata</asp:ListItem>
                                 <asp:ListItem>onorata</asp:ListItem>
                                 <asp:ListItem>receptie</asp:ListItem>
+                                <asp:ListItem>despagubire</asp:ListItem>
                                 <asp:ListItem>rezervare</asp:ListItem>
                             </asp:DropDownList>
                         </td>
@@ -364,16 +365,79 @@
                 <asp:Label ID="lblRez" runat="server"></asp:Label>
                 <br />
                 <asp:Label ID="LblNopti" runat="server"></asp:Label>
-                <asp:Chart ID="Chart1" runat="server">
-                    <series>
-                        <asp:Series Name="Series1" ChartArea="ChartArea1">
-                        </asp:Series>
-                    </series>
-                    <chartareas>
-                        <asp:ChartArea Name="ChartArea1">
-                        </asp:ChartArea>
-                    </chartareas>
-                </asp:Chart>
+            </ContentTemplate>
+        </asp:TabPanel>
+        <asp:TabPanel ID="TabPanel5" runat="server" HeaderText="TabPanel5">
+            <HeaderTemplate>
+                Rezervari
+            </HeaderTemplate>
+            <ContentTemplate>
+                <asp:GridView ID="GridView4" runat="server" AutoGenerateColumns="False" 
+                    DataKeyNames="Id" DataSourceID="SqlDataSource4" CellPadding="4" 
+                    ForeColor="#333333" GridLines="None" Width="1091px">
+                    <AlternatingRowStyle BackColor="White" />
+                    <Columns>
+                        <asp:CommandField ShowDeleteButton="True" ShowEditButton="True" />
+                        <asp:BoundField DataField="IdCam" HeaderText="IdCam" SortExpression="IdCam" />
+                        <asp:BoundField DataField="Data1" HeaderText="Data1" SortExpression="Data1" />
+                        <asp:BoundField DataField="Data2" HeaderText="Data2" SortExpression="Data2" />
+                        <asp:BoundField DataField="Nume" HeaderText="Nume" SortExpression="Nume" />
+                        <asp:BoundField DataField="CNP" HeaderText="CNP" SortExpression="CNP" />
+                        <asp:BoundField DataField="Adresa" HeaderText="Adresa" 
+                            SortExpression="Adresa" />
+                        <asp:BoundField DataField="Telefon" HeaderText="Telefon" 
+                            SortExpression="Telefon" />
+                        <asp:BoundField DataField="Mail" HeaderText="Mail" 
+                            SortExpression="Mail" />
+                        <asp:BoundField DataField="Stare" HeaderText="Stare" 
+                            SortExpression="Stare" />
+                        <asp:BoundField DataField="Id" HeaderText="Id" SortExpression="Id" 
+                            InsertVisible="False" ReadOnly="True" />
+                    </Columns>
+                    <FooterStyle BackColor="#990000" Font-Bold="True" ForeColor="White" />
+                    <HeaderStyle BackColor="#990000" Font-Bold="True" ForeColor="White" />
+                    <PagerStyle BackColor="#FFCC66" ForeColor="#333333" HorizontalAlign="Center" />
+                    <RowStyle BackColor="#FFFBD6" ForeColor="#333333" />
+                    <SelectedRowStyle BackColor="#FFCC66" Font-Bold="True" ForeColor="Navy" />
+                    <SortedAscendingCellStyle BackColor="#FDF5AC" />
+                    <SortedAscendingHeaderStyle BackColor="#4D0000" />
+                    <SortedDescendingCellStyle BackColor="#FCF6C0" />
+                    <SortedDescendingHeaderStyle BackColor="#820000" />
+                </asp:GridView>
+                <asp:SqlDataSource ID="SqlDataSource4" runat="server" 
+                    ConnectionString="<%$ ConnectionStrings:Rezervari-Conexiune %>" 
+                    DeleteCommand="DELETE FROM [Rezervari] WHERE [Id] = @Id" 
+                    InsertCommand="INSERT INTO [Rezervari] ([IdCam], [Data1], [Data2], [Nume], [CNP], [Adresa], [Telefon], [Mail], [Stare]) VALUES (@IdCam, @Data1, @Data2, @Nume, @CNP, @Adresa, @Telefon, @Mail, @Stare)" 
+                    SelectCommand="SELECT [Id], [IdCam], [Data1], [Data2], [Nume], [CNP], [Adresa], [Telefon], [Mail], [Stare] FROM [Rezervari] WhERE [Stare]='rezervare'" 
+                    
+                    UpdateCommand="UPDATE [Rezervari] SET [IdCam] = @IdCam, [Data1] = @Data1, [Data2] = @Data2, [Nume] = @Nume, [CNP] = @CNP, [Adresa] = @Adresa, [Telefon] = @Telefon, [Mail] = @Mail, [Stare] = @Stare WHERE [Id] = @Id">
+                    <DeleteParameters>
+                        <asp:Parameter Name="Id" Type="Int32" />
+                    </DeleteParameters>
+                    <InsertParameters>
+                        <asp:Parameter Name="IdCam" Type="Int32" />
+                        <asp:Parameter DbType="Date" Name="Data1" />
+                        <asp:Parameter DbType="Date" Name="Data2" />
+                        <asp:Parameter Name="Nume" Type="String" />
+                        <asp:Parameter Name="CNP" Type="String" />
+                        <asp:Parameter Name="Adresa" Type="String" />
+                        <asp:Parameter Name="Telefon" Type="String" />
+                        <asp:Parameter Name="Mail" Type="String" />
+                        <asp:Parameter Name="Stare" Type="String" />
+                    </InsertParameters>
+                    <UpdateParameters>
+                        <asp:Parameter Name="IdCam" Type="Int32" />
+                        <asp:Parameter DbType="Date" Name="Data1" />
+                        <asp:Parameter DbType="Date" Name="Data2" />
+                        <asp:Parameter Name="Nume" Type="String" />
+                        <asp:Parameter Name="CNP" Type="String" />
+                        <asp:Parameter Name="Adresa" Type="String" />
+                        <asp:Parameter Name="Telefon" Type="String" />
+                        <asp:Parameter Name="Mail" Type="String" />
+                        <asp:Parameter Name="Stare" Type="String" />
+                        <asp:Parameter Name="Id" Type="Int32" />
+                    </UpdateParameters>
+                </asp:SqlDataSource>
             </ContentTemplate>
         </asp:TabPanel>
     </asp:TabContainer>

@@ -176,7 +176,7 @@ public class Conexiune
         try
         {
             con.Open();
-            query = string.Format("INSERT INTO Rezervari VALUES ('{0}', '{1}', '{2}', '{3}', '{4}', '{5}', '{6}', '{7}', '{8}', 'cerere')",  rez.IdCam, rez.Data1, rez.Data2, rez.Nume, rez.CNP, rez.Buletin, rez.Adresa, rez.Telefon, rez.Mail);
+            query = string.Format("INSERT INTO Rezervari VALUES ('{0}', '{1}', '{2}', '{3}', '{4}', '{5}', '{6}', '{7}', '{8}', '{9}')",  rez.IdCam, rez.Data1, rez.Data2, rez.Nume, rez.CNP, rez.Buletin, rez.Adresa, rez.Telefon, rez.Mail, rez.Stare);
             comanda.CommandText = query;
             comanda.ExecuteNonQuery();            
         }
@@ -254,7 +254,9 @@ public class Conexiune
         comanda = new SqlCommand("", con);
 
         ArrayList list = new ArrayList();
-        string query = string.Format("select COUNT(id) from [Rezervari].[dbo].[Rezervari] where IdCam = '{0}' and Stare = '{3}' and (Data1 > '{1}' and Data1 < '{2}') and (Data2 > '{1}' and Data2 < '{2}')", id, data1, data2, stare);
+        string query;
+        if (id != 0) query = string.Format("select COUNT(id) from [Rezervari].[dbo].[Rezervari] where IdCam = '{0}' and Stare = '{3}' and (Data1 > '{1}' and Data1 < '{2}') and (Data2 > '{1}' and Data2 < '{2}')", id, data1, data2, stare);
+        else query = string.Format("select COUNT(id) from [Rezervari].[dbo].[Rezervari] where Stare = '{3}' and (Data1 > '{1}' and Data1 < '{2}') and (Data2 > '{1}' and Data2 < '{2}')", id, data1, data2, stare);
 
         try
         {
@@ -283,7 +285,9 @@ public class Conexiune
         comanda = new SqlCommand("", con);
 
         ArrayList list = new ArrayList();
-        string query = string.Format("select Data1, Data2 from [Rezervari].[dbo].[Rezervari] where IdCam = '{0}' and Stare = '{3}' and (Data1 > '{1}' and Data1 < '{2}') and (Data2 > '{1}' and Data2 < '{2}')", id, data1, data2, stare);
+        string query;
+        if (id != 0) query = string.Format("select Data1, Data2 from [Rezervari].[dbo].[Rezervari] where IdCam = '{0}' and Stare = '{3}' and (Data1 > '{1}' and Data1 < '{2}') and (Data2 > '{1}' and Data2 < '{2}')", id, data1, data2, stare);
+        else query = string.Format("select Data1, Data2 from [Rezervari].[dbo].[Rezervari] where Stare = '{3}' and (Data1 > '{1}' and Data1 < '{2}') and (Data2 > '{1}' and Data2 < '{2}')", id, data1, data2, stare);
 
         try
         {

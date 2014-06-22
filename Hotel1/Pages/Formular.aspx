@@ -108,10 +108,16 @@
             <asp:TextBox ID="txtMail" runat="server"></asp:TextBox>
             <asp:RequiredFieldValidator ValidationGroup="rez" ID="RequiredFieldValidator6" runat="server" 
                 ErrorMessage="*" ControlToValidate="txtMail"></asp:RequiredFieldValidator>
+            <asp:RegularExpressionValidator ValidationGroup="rez" 
+        ID="RegularExpressionValidator1" runat="server" ControlToValidate="txtMail"
+                ErrorMessage="Mail invalid" 
+        ValidationExpression="\w+([-+.']\w+)*@\w+([-.]\w+)*\.\w+([-.]\w+)*" 
+        CssClass="CDescr" ></asp:RegularExpressionValidator>
         </td>
     </tr>
 </table>
     <asp:Label ID="lblRes" runat="server"></asp:Label>
+            
     <br />
     <asp:Button ValidationGroup="rez" ID="btnRez" runat="server" onclick="btnRez_Click" Text="Rezerva" />
 </asp:Content>
